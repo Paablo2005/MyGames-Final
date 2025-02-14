@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import models.User;
 import dao.UserDaoImpl;
@@ -69,7 +70,7 @@ public class LoginDataController {
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
             stage.setTitle("MyGames");
-
+            
             MainPaneController mainPaneController = loader.getController();
             User authenticatedUser = getAuthenticatedUser();
             mainPaneController.setUserData(authenticatedUser);
