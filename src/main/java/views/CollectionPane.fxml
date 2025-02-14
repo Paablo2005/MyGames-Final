@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="629.6" prefWidth="709.6" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CollectionPaneController">
+    <center>
+        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" vbarPolicy="NEVER">
+            <content>
+                <BorderPane style="-fx-background-image: url('Images/GradientBackground.png'); -fx-background-size: cover;">
+                    <top>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <padding>
+                                <Insets bottom="30.0" left="10.0" right="10.0" top="30.0" />
+                            </padding>
+                            <children>
+                                <Pane fx:id="titlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="643.0" style="-fx-background-image: url('Images/CollectionImage.png'); -fx-background-size: cover; -fx-background-position: center;">
+                                    <children>
+                                        <Pane fx:id="paneDescription" layoutX="53.0" layoutY="44.0" prefHeight="135.0" prefWidth="320.0" style="-fx-background-color: rgba(0, 0, 0, 0.7);">
+                                            <children>
+                                                <Label layoutX="11.0" layoutY="14.0" text="MyGames" textFill="#2d14d1">
+                                                    <font>
+                                                        <Font name="Consolas Bold" size="25.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label layoutX="11.0" layoutY="59.0" text="Games Collection" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Consolas" size="25.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label layoutX="11.0" layoutY="104.0" text="Your collection with all your videogames" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Consolas" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </Pane>
+                            </children>
+                        </HBox>
+                    </top>
+                    <center>
+                        <GridPane alignment="CENTER" fx:id="gridGameContainer" hgap="40" vgap="10">
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </padding>
+                        </GridPane>
+                    </center>
+                </BorderPane>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

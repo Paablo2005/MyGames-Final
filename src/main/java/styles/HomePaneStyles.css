@@ -1,0 +1,56 @@
+/* Estilos generales del contenedor raíz */
+.home-border {
+    /* Puedes agregar estilos generales aquí si lo deseas */
+}
+
+/* Fondo degradado para el contenedor interno */
+.gradient-background {
+    -fx-background-image: url("../../../src/main/resources/Images/GradientBackground.png");
+    -fx-background-size: cover;
+}
+
+/* Estilo para el panel del título con imagen de fondo */
+.title-pane {
+    -fx-background-image: url("../../../src/main/resources/Images/homeTitle.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+/* Título principal "MyGames" */
+.title-label {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 80px;
+}
+
+/* Etiqueta "TM" */
+.tm-label {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 20px;
+}
+
+/* Contenedor del título de sección "Popular Games" */
+.popular-games-container {
+    -fx-padding: 8px 10px 30px 20px; /* top, right, bottom, left */
+}
+
+/* Etiqueta "Popular Games" */
+.popular-games-label {
+    -fx-text-fill: #00dbff;
+    -fx-font-family: "Verdana";
+    -fx-font-size: 25px;
+}
+
+/* Subrayado (rectángulo) debajo de "Popular Games" */
+.underline-rect {
+    -fx-fill: #00dbff;
+    -fx-stroke: #00dbff;
+    -fx-stroke-line-cap: round;
+    -fx-stroke-type: inside;
+}
+
+/* Contenedor de la grilla de juegos */
+.game-grid {
+    -fx-padding: 10px;
+}

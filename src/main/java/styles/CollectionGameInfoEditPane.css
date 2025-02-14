@@ -1,0 +1,58 @@
+/* Fondo principal */
+.main-pane {
+    -fx-background-image: url("../../../src/main/resources/Images/GradientBackground.png");
+    -fx-background-size: cover;
+}
+
+/* Panel central translúcido */
+.translucent-pane {
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Paneles para imágenes (fondo rojo) */
+.image-pane {
+    -fx-background-color: red;
+}
+
+/* Botones de subir imagen */
+.upload-button {
+    -fx-font-family: Consolas;
+    -fx-font-size: 12px;
+}
+
+/* Etiquetas en negrita con tamaño 15 (por ejemplo, Commentary, Platform, etc.) */
+.bold-label-15 {
+    -fx-font-family: Consolas;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+/* CheckBox "PLAYED" */
+.played-checkbox {
+    -fx-font-family: Consolas;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-text-fill: #ff0073;
+}
+
+/* Etiqueta "MY RATING" */
+.my-rating-label {
+    -fx-font-family: Consolas;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-text-fill: #e2ff00;
+}
+
+/* Icono de guardar */
+.save-icon {
+    -fx-background-image: url("../../../src/main/resources/Images/IconSave.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+/* Icono de cancelar */
+.cancel-icon {
+    -fx-background-image: url("../../../src/main/resources/Images/IconCancel.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}

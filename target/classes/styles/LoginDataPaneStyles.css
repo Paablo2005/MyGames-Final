@@ -1,0 +1,47 @@
+/* Estilo para el nodo raíz */
+.root-pane {
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Título de bienvenida */
+.welcome-title {
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+    -fx-font-family: "Consolas Bold Italic";
+}
+
+/* Subtítulo de bienvenida */
+.welcome-subtitle {
+    -fx-text-fill: white;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 12px;
+}
+
+/* Etiqueta de formulario */
+.form-label {
+    -fx-text-fill: white;
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 12px;
+}
+
+/* Indicador de campo requerido */
+.required-indicator {
+    -fx-text-fill: red;
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 12px;
+}
+
+/* Estilo para los campos de entrada (TextField y PasswordField) */
+.input-field {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+}
+
+/* Botón de login */
+.btn-login {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-cursor: hand;
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 12px;
+}

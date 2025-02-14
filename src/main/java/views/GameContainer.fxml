@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="156.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameContainerController">
+   <bottom>
+      <FlowPane alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="156.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+         <children>
+        	<Label fx:id="labelName" prefHeight="28.0" prefWidth="154.0" text="Game Name" textFill="WHITE" wrapText="true" />
+         </children>
+      </FlowPane>
+   </bottom>
+   <center>
+      <Pane fx:id="paneImg" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<BorderPane prefHeight="629.6" prefWidth="709.6" 
+            xmlns="http://javafx.com/javafx/23.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="controllers.HomePaneController"
+            stylesheets="/styles/HomePaneStyles.css"
+            styleClass="home-border">
+    <center>
+        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" vbarPolicy="NEVER">
+            <content>
+                <!-- Contenedor con fondo degradado -->
+                <BorderPane styleClass="gradient-background">
+                    <top>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <padding>
+                                <Insets bottom="30.0" left="10.0" right="10.0" top="30.0" />
+                            </padding>
+                            <children>
+                                <!-- Título con imagen de fondo -->
+                                <Pane fx:id="titlePane" maxHeight="-Infinity" maxWidth="-Infinity" 
+                                      minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="643.0" 
+                                      styleClass="title-pane">
+                                    <children>
+                                        <HBox fx:id="paneDescription" alignment="CENTER" maxHeight="-Infinity" 
+                                              maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+                                              prefHeight="222.0" prefWidth="643.0">
+                                            <children>
+                                                <!-- Título principal -->
+                                                <Label alignment="CENTER_RIGHT" prefHeight="134.0" prefWidth="433.0" 
+                                                       text="MyGames" styleClass="title-label" />
+                                                <!-- Subtítulo (TM) -->
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
+                                                      minWidth="-Infinity" prefHeight="72.0" prefWidth="35.0">
+                                                    <children>
+                                                        <Label text="TM" styleClass="tm-label"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </Pane>
+                            </children>
+                        </HBox>
+                    </top>
+                    <center>
+                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <!-- Contenedor del título de sección "Popular Games" -->
+                                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="708.0" styleClass="popular-games-container">
+                                            <children>
+                                                <Label text="Popular Games" styleClass="popular-games-label">
+                                                    <opaqueInsets>
+                                                        <Insets />
+                                                    </opaqueInsets>
+                                                </Label>
+                                                <HBox prefHeight="32.0" prefWidth="15.0" />
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="3.0" width="472.0" 
+                                                           styleClass="underline-rect" />
+                                            </children>
+                                        </HBox>
+                                        <!-- Contenedor de juegos -->
+                                        <GridPane fx:id="gridGameContainer" alignment="CENTER" hgap="40" vgap="10" 
+                                                  VBox.vgrow="ALWAYS" styleClass="game-grid"/>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </center>
+                </BorderPane>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

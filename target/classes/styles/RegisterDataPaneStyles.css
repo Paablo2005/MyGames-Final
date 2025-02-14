@@ -1,0 +1,47 @@
+/* Estilo para el nodo raíz */
+.root-pane {
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Título de registro */
+.register-title {
+    -fx-font-size: 30px;
+    -fx-font-family: "Consolas Bold Italic";
+}
+
+/* Botón para crear cuenta */
+.create-account-button {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+    -fx-cursor: hand;
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 12px;
+}
+
+/* Campos de entrada (TextField y PasswordField) */
+.input-field {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-background-radius: 15;
+}
+
+/* Etiquetas de los formularios */
+.form-label {
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}
+
+/* Indicador de campo obligatorio */
+.required-indicator {
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 12px;
+    -fx-text-fill: red;
+}
+
+/* Opcional: Estilo para las filas del formulario */
+.form-row {
+    -fx-hgap: 10;
+    -fx-vgap: 5;
+}

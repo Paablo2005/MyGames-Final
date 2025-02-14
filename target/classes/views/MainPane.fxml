@@ -1,0 +1,166 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="960.0" 
+            xmlns="http://javafx.com/javafx/23.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="controllers.MainPaneController"
+            stylesheets="/styles/MainPaneStyles.css"
+            styleClass="main-pane">
+	<children>
+		<BorderPane prefHeight="480.0" prefWidth="854.0" 
+		            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" 
+		            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+		            styleClass="background-border">
+			<left>
+				<BorderPane prefHeight="430.0" prefWidth="250.0" 
+				            BorderPane.alignment="CENTER"
+				            styleClass="sidebar">
+					<bottom>
+						<BorderPane prefHeight="85.0" prefWidth="200.0" 
+						            BorderPane.alignment="CENTER">
+							<left>
+								<FlowPane fx:id="containerImgProfile" alignment="CENTER" 
+								          prefHeight="86.0" prefWidth="75.0"
+								          styleClass="img-profile-container" 
+								          BorderPane.alignment="CENTER">
+									<children>
+										<Label fx:id="lblProfileImg" prefHeight="60.0" prefWidth="60.0">
+											<graphic>
+												<StackPane>
+													<ImageView fx:id="profileImageView" 
+													           fitHeight="60.0" fitWidth="60.0" />
+												</StackPane>
+											</graphic>
+										</Label>
+									</children>
+								</FlowPane>
+							</left>
+							<right>
+								<FlowPane fx:id="ContainerLogOut" alignment="CENTER" 
+								          prefHeight="86.0" prefWidth="50.0"
+								          styleClass="logout-container" 
+								          BorderPane.alignment="CENTER">
+									<children>
+										<Label fx:id="lblImgLogOut" prefHeight="30.0" prefWidth="30.0"
+										       styleClass="img-logout" />
+									</children>
+								</FlowPane>
+							</right>
+							<center>
+								<FlowPane fx:id="containerData" alignment="CENTER_LEFT" orientation="VERTICAL" 
+								          prefHeight="200.0" prefWidth="200.0"
+								          styleClass="data-container" 
+								          BorderPane.alignment="CENTER">
+									<children>
+										<Label fx:id="lblUsername" text="Username" styleClass="data-label" />
+										<Label fx:id="lblMail" text="Mail" styleClass="data-label" />
+										<Label fx:id="lblDate" text="Date" styleClass="data-label" />
+									</children>
+								</FlowPane>
+							</center>
+						</BorderPane>
+					</bottom>
+					<top>
+						<GridPane prefHeight="220.0" prefWidth="250.0" vgap="10.0" 
+						          BorderPane.alignment="CENTER">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<FlowPane fx:id="btnHome" alignment="CENTER_LEFT" hgap="20.0" 
+								          prefHeight="200.0" prefWidth="200.0"
+								          styleClass="btn-home">
+									<children>
+										<Label fx:id="lblImgHome" prefHeight="30.0" prefWidth="30.0"
+										       styleClass="img-home" />
+										<Label text="HOME" styleClass="btn-home-label" />
+									</children>
+									<padding>
+										<Insets left="20.0" />
+									</padding>
+								</FlowPane>
+								<FlowPane fx:id="btnCollection" alignment="CENTER_LEFT" hgap="20.0" 
+								          prefHeight="200.0" prefWidth="200.0"
+								          styleClass="btn-collection" GridPane.rowIndex="1">
+									<children>
+										<Label fx:id="lblImgCollection" prefHeight="30.0" prefWidth="30.0"
+										       styleClass="img-collection" />
+										<Label text="COLLECTION" styleClass="btn-collection-label" />
+									</children>
+									<padding>
+										<Insets left="20.0" />
+									</padding>
+								</FlowPane>
+								<FlowPane fx:id="btnGames" alignment="CENTER_LEFT" hgap="20.0" 
+								          prefHeight="200.0" prefWidth="250.0"
+								          styleClass="btn-games" GridPane.rowIndex="2">
+									<children>
+										<Label fx:id="lblImgGames" prefHeight="30.0" prefWidth="30.0"
+										       styleClass="img-games" />
+										<Label text="GAMES" styleClass="btn-games-label" />
+									</children>
+									<padding>
+										<Insets left="20.0" />
+									</padding>
+								</FlowPane>
+							</children>
+							<padding>
+								<Insets top="40.0" />
+							</padding>
+							<BorderPane.margin>
+								<Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+							</BorderPane.margin>
+						</GridPane>
+					</top>
+					<center>
+						<Pane prefHeight="200.0" prefWidth="246.0" BorderPane.alignment="CENTER" />
+					</center>
+				</BorderPane>
+			</left>
+			<top>
+				<BorderPane prefHeight="70.0" prefWidth="854.0" 
+				            BorderPane.alignment="CENTER"
+				            styleClass="top-header">
+					<left>
+						<FlowPane alignment="CENTER_LEFT" hgap="20.0" 
+						          prefHeight="50.0" prefWidth="250.0" 
+						          BorderPane.alignment="CENTER">
+							<children>
+								<Label fx:id="lblImgControl" prefHeight="50.0" prefWidth="50.0"
+								       styleClass="img-control" />
+								<Label text="MyGames" styleClass="title-label" />
+							</children>
+							<padding>
+								<Insets left="20.0" />
+							</padding>
+						</FlowPane>
+					</left>
+                    <center>
+                        <BorderPane fx:id="paneHeader" prefHeight="200.0" prefWidth="200.0"
+                                    styleClass="pane-header" BorderPane.alignment="CENTER" />
+                    </center>
+				</BorderPane>
+			</top>
+            <center>
+                <BorderPane fx:id="panePrincipal" prefHeight="696.0" prefWidth="927.0"
+                            styleClass="pane-principal" BorderPane.alignment="CENTER" />
+            </center>
+		</BorderPane>
+	</children>
+</AnchorPane>

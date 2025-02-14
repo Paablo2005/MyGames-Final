@@ -1,0 +1,47 @@
+/* Fondo principal del BorderPane */
+.main-background {
+  -fx-background-image: url('../../../src/main/resources/Images/GradientBackground.png');
+  -fx-background-size: cover;
+}
+
+/* Fondo semitransparente para el contenedor de datos */
+.data-container {
+  -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Fondo del contenedor del botón DELETE */
+.delete-button-background {
+  -fx-background-color: red;
+}
+
+/* Estilo para el botón DELETE */
+.btn-delete {
+  -fx-text-fill: white;
+  -fx-cursor: hand;
+  -fx-font-family: "Consolas";
+  -fx-font-size: 12px;
+}
+
+/* Estilo para el botón SAVE */
+.btn-save {
+  -fx-background-image: url('../../../src/main/resources/Images/IconSave.png');
+  -fx-background-size: cover;
+  -fx-background-position: center;
+  -fx-cursor: hand;
+}
+
+/* Estilo para el botón CANCEL */
+.btn-cancel {
+  -fx-background-image: url('../../../src/main/resources/Images/IconCancel.png');
+  -fx-background-size: cover;
+  -fx-background-position: center;
+  -fx-cursor: hand;
+}
+
+/* Estilo para el botón EDIT */
+.btn-edit {
+  -fx-background-image: url('../../../src/main/resources/Images/Editpng.png');
+  -fx-background-size: cover;
+  -fx-background-position: center;
+  -fx-cursor: hand;
+}

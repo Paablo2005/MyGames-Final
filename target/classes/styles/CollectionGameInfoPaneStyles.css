@@ -1,0 +1,187 @@
+/* Contenedor raíz con fondo degradado */
+.collection-game-info-pane {
+    -fx-background-image: url("../../../src/main/resources/Images/GradientBackground.png");
+    -fx-background-size: cover;
+}
+
+/* Espacios superior y laterales (transparentes) */
+.top-space, .side-space {
+    -fx-background-color: transparent;
+}
+
+/* FlowPane del área inferior de imágenes */
+.images-flowpane {
+    /* Aquí puedes agregar márgenes o ajustes adicionales si es necesario */
+}
+
+/* Paneles de imagen (fondo rojo, según el estilo original) */
+.image-pane {
+    -fx-background-color: red;
+}
+
+/* Panel central con fondo blanco semitransparente */
+.center-pane {
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Contenedor de comentario */
+.commentary-container {
+    /* Ajustes opcionales: padding, margen, etc. */
+}
+
+/* Título del comentario */
+.commentary-title {
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+}
+
+/* Texto del comentario */
+.commentary-text {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+}
+
+/* Sección de información general */
+.info-section {
+    /* Estilos de separación, margen o padding si es necesario */
+}
+
+/* Panel izquierdo de información */
+.info-left {
+    /* Ajustes opcionales */
+}
+
+/* Títulos de información (Platform, Developer / Studio, Genre) */
+.info-title {
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+}
+
+/* Textos de información */
+.info-text {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+}
+
+/* Sección para el título y descripción */
+.title-description-section {
+    /* Ajustes opcionales */
+}
+
+/* Contenedor del título (dentro de la sección superior) */
+.section-title {
+    /* Ajustes opcionales de padding/margen */
+}
+
+/* Texto del título */
+.section-title-text {
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 18px;
+    -fx-text-fill: blue; /* Según el estilo original */
+}
+
+/* Contenedor de la descripción */
+.description-container {
+    /* Ajustes opcionales */
+}
+
+/* Texto de la descripción */
+.description-text {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+}
+
+/* Panel derecho de información */
+.info-right {
+    /* Ajustes opcionales */
+}
+
+/* Sección de imagen y rating */
+.image-rating-section {
+    /* Ajustes opcionales */
+}
+
+/* Contenedor de la imagen del juego */
+.game-image-container {
+    /* Ajustes opcionales */
+}
+
+/* Imagen del juego */
+.game-image {
+    -fx-background-color: red;  /* Mismo color que los otros paneles de imagen */
+}
+
+/* Contenedor para la fecha de finalización */
+.finish-date-container {
+    /* Ajustes opcionales */
+}
+
+/* Título de fecha de finalización */
+.finish-date-title {
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+}
+
+/* Texto de fecha de finalización */
+.finish-date-text {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+}
+
+/* Contenedor del CheckBox "PLAYED" */
+.played-checkbox-container {
+    /* Ajustes opcionales */
+}
+
+/* CheckBox "PLAYED" */
+.played-checkbox {
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 22px;
+    -fx-text-fill: #ff0073;
+}
+
+/* Sección inferior */
+.bottom-section {
+    /* Ajustes opcionales */
+}
+
+/* Contenedor del rating */
+.rating-container {
+    /* Ajustes opcionales */
+}
+
+/* Título del rating */
+.rating-title {
+    -fx-font-family: "Consolas Bold";
+    -fx-font-size: 22px;
+    -fx-text-fill: #e2ff00;
+}
+
+/* Control de rating (ControlsFX Rating) */
+.rating-control {
+    /* Puedes agregar estilos adicionales si es necesario */
+}
+
+/* Contenedor del género */
+.genre-container {
+    /* Ajustes opcionales */
+}
+
+/* Contenedor del botón de edición */
+.edit-button-container {
+    /* Ajustes opcionales */
+}
+
+/* Botón de edición: imagen de fondo */
+.edit-button {
+    -fx-background-image: url("../../../src/main/resources/Images/Editpng.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
