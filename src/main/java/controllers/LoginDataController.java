@@ -68,12 +68,12 @@ public class LoginDataController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainPane.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
-            stage.setTitle("Main Pane");
+            stage.setTitle("MyGames");
 
             MainPaneController mainPaneController = loader.getController();
             User authenticatedUser = getAuthenticatedUser();
             mainPaneController.setUserData(authenticatedUser);
-
+            stage.setResizable(false);
             stage.show();
 
             Stage currentStage = (Stage) btnLogin.getScene().getWindow();

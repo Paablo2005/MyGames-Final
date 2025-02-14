@@ -70,6 +70,7 @@ public class MainPaneController {
 
     @FXML
     public void initialize() {
+    	loadHomePane();
     	containerImgProfile.layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
             double radius = Math.min(newBounds.getWidth(), newBounds.getHeight()) / 2;
             Circle clip = new Circle(newBounds.getWidth() / 2, newBounds.getHeight() / 2, radius);
