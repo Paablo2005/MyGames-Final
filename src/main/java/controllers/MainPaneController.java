@@ -92,6 +92,9 @@ public class MainPaneController {
     
     private BorderPane collectionGameInfoEditPane;
     private CollectionGameInfoEditPaneController collectionGameInfoEditPaneController;
+    
+    private AnchorPane descriptionPane;
+    private DescriptionPaneController descriptionPaneController;
 
     @FXML
     public void initialize() {
@@ -117,6 +120,7 @@ public class MainPaneController {
         preloadGameInfoDatabasePane();
     	collectionGameInfoController.setSession();
     	collectionGameInfoEditPaneController.setSession(collectionGameInfoController.getSession());
+    	descriptionPaneController.setSession(collectionGameInfoController.getSession());
     	
         clearHeaderPane();
         // Configurar los clics en los botones
@@ -319,15 +323,19 @@ public class MainPaneController {
     
     private void preloadGameInfoDatabasePane() {
     	try {
+    		
     		FXMLLoader infoLoader = new FXMLLoader(getClass().getResource("/views/CollectionGameInfoPane.fxml"));
-
 			collectionGameInfoPane = infoLoader.load();
 			collectionGameInfoController = infoLoader.getController();
 			
 			FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/views/CollectionGameInfoEditPane.fxml"));
-
 			collectionGameInfoEditPane = editLoader.load();
 			collectionGameInfoEditPaneController = editLoader.getController();
+			
+			FXMLLoader apiDetails = new FXMLLoader(getClass().getResource("/views/DescriptionPane.fxml"));
+			descriptionPane = apiDetails.load();
+			descriptionPaneController = apiDetails.getController();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -336,7 +344,6 @@ public class MainPaneController {
     protected void loadGameDetailsFromDatabase(int gameId) {
     	clearHeaderPane();
         try {
-        	// Tenemos única conexión a la BBDD antes de cargar los detalles un juego.
 	    	collectionGameInfoController.setGame(gameId);
 	    	collectionGameInfoEditPaneController.setGame(gameId);
 	    	
@@ -344,7 +351,7 @@ public class MainPaneController {
 	    } catch (Exception e) {
 	        Alert alert = new Alert(Alert.AlertType.ERROR);
 	        alert.setTitle("Error");
-	        alert.setHeaderText("Error al cargar GamesPane");
+	        alert.setHeaderText("Error al cargar CollectionGameInfo");
 	        alert.setContentText(e.getMessage());
 	        alert.showAndWait();
 	        e.printStackTrace();
@@ -353,5 +360,21 @@ public class MainPaneController {
 
 	public void editDatabaseGame() {		
 		panePrincipal.setCenter(collectionGameInfoEditPane);
+	}
+
+	public void loadGameDetailsFromApi(int apiId) {
+    	clearHeaderPane();
+        try {
+        	descriptionPaneController.setGame(apiId);
+        	
+	    	panePrincipal.setCenter(descriptionPane);
+	    } catch (Exception e) {
+	        Alert alert = new Alert(Alert.AlertType.ERROR);
+	        alert.setTitle("Error");
+	        alert.setHeaderText("Error al cargar GameDetailsFromApi");
+	        alert.setContentText(e.getMessage());
+	        alert.showAndWait();
+	        e.printStackTrace();
+	    }
 	}
 }

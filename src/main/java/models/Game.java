@@ -77,11 +77,19 @@ public class Game {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Collection> collections = new HashSet<>();
 
-    public Game() {
-    	this.developers = "";
+	public Game() {
+		this.name = "";
+		this.releaseDate = null;
+		this.description = "";
+		this.apiId = 0;
+		this.image = "";
+		this.image1 = "";
+		this.image2 = "";
+		this.image3 = "";
+	  	this.developers = ""; 
     	this.genres = new HashSet<>();
     	this.platforms = new HashSet<>();
-    }
+	}
 
 	public int getId() {
 		return gameId;

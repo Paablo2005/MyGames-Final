@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DescriptionPaneController">
+
+    <children>
+        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="800" minHeight="250" style="-fx-background: transparent; -fx-border-color: transparent;" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <content>
+                <VBox alignment="CENTER" prefHeight="-1" prefWidth="-1" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #002147, #001021); -fx-padding: 10;">
+                    
+                    <ImageView fx:id="gameImage" fitHeight="250" fitWidth="700" preserveRatio="true" />
+                    
+                    <VBox maxWidth="800" prefWidth="700" spacing="10" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-padding: 10;">
+                        
+                        <Label fx:id="gameTitle" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #007bff;" text="Game Title" />
+
+                        <!-- TextArea -->
+                        <TextArea fx:id="gameDescription" editable="false" maxHeight="600" maxWidth="700" prefHeight="180" style="-fx-control-inner-background: transparent; -fx-background-color: rgba(255,255,255,0.1);                                     -fx-text-fill: white; -fx-font-size: 14; -fx-border-color: transparent; -fx-padding: 10;                                    -fx-pref-row-count: 4;" text="Game Description" wrapText="true" />
+
+                        <HBox alignment="CENTER_LEFT" spacing="20">
+                            <VBox spacing="10">
+                                <VBox spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: white;" text="🛠 Information" />
+                                    <Label fx:id="gameDeveloper" style="-fx-text-fill: white;" text="Information" />
+                                </VBox>
+
+                                <VBox spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: white;" text="🎭 Release Date" />
+                                    <Label fx:id="metaScore" style="-fx-text-fill: white;" text="Release date" />
+                                </VBox>
+                            </VBox>
+
+                            <Region prefWidth="130" /> <!-- Espacio para mover el botón a la derecha -->
+
+                            <Button fx:id="btnAdd" onMouseClicked="#addToCollection" style="-fx-background-color: #28a745; -fx-text-fill: white;                                         -fx-font-size: 18; -fx-padding: 10 20; -fx-border-radius: 8;" text="➕ Guardar" />
+                        </HBox>
+                    </VBox>
+
+                    <!-- HBox para las imágenes, con menos espacio lateral -->
+                    <HBox alignment="CENTER" prefWidth="700" spacing="10" style="-fx-padding: 10 5 0 5;">
+                        <ImageView fx:id="screenshot1" fitHeight="140" fitWidth="200" preserveRatio="true" />
+                        <ImageView fx:id="screenshot2" fitHeight="140" fitWidth="200" preserveRatio="true" />
+                        <ImageView fx:id="screenshot3" fitHeight="140" fitWidth="200" preserveRatio="true" />
+                    </HBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

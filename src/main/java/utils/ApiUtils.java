@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class ApiUtils {
      * Clave de API utilizada para autenticar las solicitudes a la API RAWG.
      */
     private static final String API_KEY = "d1893f9cf1ed4022900123eaa2bc63cf";
+    
+    private static final String BASIC_API_REQUEST = "https://api.rawg.io/api/games/";
     
     /**
      * Obtiene una lista de juegos a partir de la API RAWG.
@@ -92,40 +95,6 @@ public class ApiUtils {
             e.printStackTrace();
             return null;
         }
-    }
-    
-    /**
-     * Convierte una cadena de calificación ESBR a su valor enumerado correspondiente.
-     * <p>
-     * Si la cadena no coincide exactamente con el nombre del valor del enumerado,
-     * se realizan algunas conversiones específicas.
-     * </p>
-     *
-     * @param rating la cadena de calificación obtenida de la API.
-     * @return el valor {@link Rating} correspondiente a la cadena proporcionada.
-     */
-    public static Rating getEsbrRating(String rating) {
-        if (rating.equals("Everyone 10+")) {
-            return Enum.valueOf(Rating.class, "Everyone10Plus");
-        } else if (rating.equals("Adults Only")) {
-            return Enum.valueOf(Rating.class, "AdultsOnly");
-        } else if (rating.equals("Rating Pending")) {
-            return Enum.valueOf(Rating.class, "RatingPending");
-        } else {
-            return Enum.valueOf(Rating.class, rating);            
-        }
-    }
-    
-    /**
-     * Enumeración de calificaciones ESBR.
-     */
-    public enum Rating {
-        Everyone,
-        Everyone10Plus,
-        Teen,
-        Mature,
-        AdultsOnly,
-        RatingPending
     }
     
     /**
@@ -217,5 +186,51 @@ public class ApiUtils {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    public static Game loadGameData(int apiId) {
+    	String response = makeRequest(BASIC_API_REQUEST+apiId+"?key="+API_KEY);
+    	Game result = new Game();
+    	
+        if (response != null) {
+            JSONObject jsonResponse = new JSONObject(response);
+            JSONArray platforms = jsonResponse.getJSONArray("platforms");
+            
+            result.setApiId(jsonResponse.getInt("id"));
+            result.setName(jsonResponse.getString("name"));
+            result.setReleaseDate(Date.valueOf(jsonResponse.getString("released")));
+            result.setPrincipalImg(jsonResponse.optString("background_image", "null"));
+            result.setDescription(jsonResponse.optString("description", "No description yet."));
+            
+            ArrayList<String> imgs = loadGameScreenshots(apiId);
+            if (imgs.size() > 0 && imgs.get(0) != null)
+            	result.setImage1(imgs.get(0));
+            
+            if (imgs.size() > 1 && imgs.get(1) != null)
+            	result.setImage2(imgs.get(1));
+            
+            if (imgs.size() > 2 && imgs.get(2) != null)
+            	result.setImage3(imgs.get(2));
+        }
+		
+    	return result;
+    }
+    
+    public static ArrayList<String> loadGameScreenshots(int apiId) {
+    	String response = makeRequest(BASIC_API_REQUEST+apiId+"/screenshots?key="+API_KEY);
+    	
+    	ArrayList<String> result = new ArrayList<String>();
+    	
+        if (response != null) {
+            JSONObject jsonResponse = new JSONObject(response);
+            JSONArray images = jsonResponse.getJSONArray("results");
+
+            for (int i = 0; i < images.length(); i++) {
+                JSONObject imgObj = images.getJSONObject(i);
+                result.add(imgObj.optString("image", "null"));
+            }
+        }
+		
+    	return result;
     }
 }

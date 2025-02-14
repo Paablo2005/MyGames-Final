@@ -57,7 +57,10 @@ public class Collection {
 	
 	public Collection(int userId, int gameId) {
 		this.id = new CollectionId(userId, gameId);
+		this.review = "";
+		this.stars = 0;
 		this.played = false;
+		this.finishDate = new Date(System.currentTimeMillis());
 	}
 
 	public CollectionId getId() {

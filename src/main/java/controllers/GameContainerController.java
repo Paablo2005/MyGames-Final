@@ -103,7 +103,7 @@ public class GameContainerController {
     			if (dao.getByApiId(game.getApiId()) != null) {
     				MainPaneController.getInstance().loadGameDetailsFromDatabase(game.getId());
     			} else {
-    				System.out.println("Juego de la API\nNo lo tenemos en la BBDD "+game.getApiId());
+    				MainPaneController.getInstance().loadGameDetailsFromApi(game.getApiId());
     			}
     		} else {
     			MainPaneController.getInstance().loadGameDetailsFromDatabase(game.getId());
