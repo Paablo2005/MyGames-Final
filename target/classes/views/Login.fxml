@@ -10,11 +10,10 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="480.0" prefWidth="854.0"
+    style="-fx-background-image: url('Images/Login.jpeg'); -fx-background-size: cover;"
     xmlns="http://javafx.com/javafx/23.0.1"
     xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="controllers.LoginController"
-    stylesheets="/styles/LoginStyles.css"
-    styleClass="background-pane">
+    fx:controller="controllers.LoginController">
     <children>
         <BorderPane AnchorPane.bottomAnchor="0.0"
             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -51,7 +50,7 @@
                                     </rowConstraints>
                                     <children>
                                         <GridPane fx:id="paneBtnLogin"
-                                            styleClass="btn-login-container">
+                                            style="-fx-background-color: E53170;">
                                             <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES"
                                                     minWidth="10.0" prefWidth="100.0" />
@@ -63,7 +62,7 @@
                                             <children>
                                                 <Label alignment="CENTER" prefHeight="107.0"
                                                     prefWidth="192.0"
-                                                    styleClass="btn-login"
+                                                    style="-fx-background-color: #0076D4; -fx-cursor: hand;"
                                                     text="LOGIN" textFill="WHITE">
                                                     <font>
                                                         <Font name="Consolas Bold" size="12.0" />
@@ -72,7 +71,7 @@
                                             </children>
                                         </GridPane>
                                         <GridPane fx:id="paneBtnRegister" alignment="CENTER"
-                                            styleClass="btn-register-container"
+                                            style="-fx-background-color: FF8906;"
                                             GridPane.columnIndex="1">
                                             <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES"
@@ -85,7 +84,7 @@
                                             <children>
                                                 <Label alignment="CENTER" prefHeight="121.0"
                                                     prefWidth="192.0"
-                                                    styleClass="btn-register"
+                                                    style="-fx-background-color: #005599; -fx-cursor: hand;"
                                                     text="REGISTER" textAlignment="CENTER" textFill="WHITE">
                                                     <font>
                                                         <Font name="Consolas Bold" size="12.0" />

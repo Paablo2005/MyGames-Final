@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefWidth="800" prefHeight="600" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="controllers.DescriptionPaneController">
+
+    <children>
+        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="NEVER"
+            style="-fx-background: transparent; -fx-border-color: transparent;"
+            minHeight="250" maxHeight="800"
+            AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+            <content>
+                <VBox alignment="CENTER" spacing="20" 
+                    style="-fx-background-color: linear-gradient(to bottom, #002147, #001021); -fx-padding: 10;"
+                    prefWidth="-1" prefHeight="-1">
+                    
+                    <ImageView fx:id="gameImage" fitHeight="250" fitWidth="700" preserveRatio="true" />
+                    
+                    <VBox style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-padding: 10;" spacing="10"
+                        prefWidth="700" maxWidth="800">
+                        
+                        <Label fx:id="gameTitle" 
+                            style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #007bff;" 
+                            text="Game Title" />
+
+                        <!-- TextArea -->
+                        <TextArea fx:id="gameDescription" wrapText="true" editable="false"
+                            style="-fx-control-inner-background: transparent; -fx-background-color: rgba(255,255,255,0.1); 
+                                   -fx-text-fill: white; -fx-font-size: 14; -fx-border-color: transparent; -fx-padding: 10;
+                                   -fx-pref-row-count: 4;" 
+                            prefHeight="180" maxHeight="600" maxWidth="700"
+                            text="Game Description" />
+
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <VBox spacing="10">
+                                <VBox spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: white;" text="🛠 Platform" />
+                                    <Label fx:id="gameDeveloper" style="-fx-text-fill: white;" text="Developer Name" />
+                                </VBox>
+
+                                <VBox spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: white;" text="🎭 Genre" />
+                                    <Label fx:id="gameGenre" style="-fx-text-fill: white;" text="Genre List" />
+                                </VBox>
+                            </VBox>
+
+                            <Region prefWidth="130" /> <!-- Espacio para mover el botón a la derecha -->
+
+                            <Button fx:id="btnAdd" 
+                                style="-fx-background-color: #28a745; -fx-text-fill: white; 
+                                       -fx-font-size: 18; -fx-padding: 10 20; -fx-border-radius: 8;"
+                                text="➕ Guardar" />
+                        </HBox>
+                    </VBox>
+
+                    <!-- HBox para las imágenes, con menos espacio lateral -->
+                    <HBox alignment="CENTER" spacing="10" 
+                        style="-fx-padding: 10 5 0 5;" prefWidth="700">
+                        <ImageView fx:id="screenshot1" fitHeight="140" fitWidth="200" preserveRatio="true" />
+                        <ImageView fx:id="screenshot2" fitHeight="140" fitWidth="200" preserveRatio="true" />
+                        <ImageView fx:id="screenshot3" fitHeight="140" fitWidth="200" preserveRatio="true" />
+                    </HBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

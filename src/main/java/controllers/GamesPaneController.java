@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Color;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -7,9 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Scale;
 import models.Game;
 import utils.ApiUtils;
 
@@ -22,11 +25,13 @@ import utils.ApiUtils;
  * </p>
  */
 public class GamesPaneController implements Initializable {
-
+  
     /**
      * Instancia única (singleton) de {@link GamesPaneController}.
      */
     private static GamesPaneController instance;
+    
+    private MainPaneController mainPaneController;
     
     /**
      * Obtiene la instancia actual de {@link GamesPaneController}.
@@ -36,6 +41,8 @@ public class GamesPaneController implements Initializable {
     public static GamesPaneController getInstance() {
         return instance;
     }
+    
+    
     
     /**
      * Página actual que se está mostrando.
@@ -106,7 +113,7 @@ public class GamesPaneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         instance = this;
-        loadPage(currentPage);
+        loadPage(1);
 
         Rectangle clipImgBackgroundTitle = new Rectangle(643, 222);
         clipImgBackgroundTitle.setArcHeight(40);
@@ -119,6 +126,8 @@ public class GamesPaneController implements Initializable {
         paneDescription.setClip(clipTxtTitle);
 
         btnPrevious.setDisable(true);
+        
+        loadGames();
     }
     
     /**
@@ -131,38 +140,42 @@ public class GamesPaneController implements Initializable {
      * @param page el número de página a cargar
      */
     public void loadPage(int page) {
-        currentPage = page;
-        gridGameContainer.getChildren().clear();
-        
-        List<Game> games = ApiUtils.fetchGames(page, gamesPerPage);
-        
-        if (games != null && !games.isEmpty()) {
-            int column = 0;
-            int row = 0;
-            for (Game game : games) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/GameContainer.fxml"));
-                    Pane gameContainer = loader.load();
-                    
-                    GameContainerController controller = loader.getController();
-                    controller.setGame(game);
-                    
-                    gridGameContainer.add(gameContainer, column, row);
-                    
-                    column++;
-                    if (column == 3) {
-                        column = 0;
-                        row++;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            btnNext.setDisable(games.size() < gamesPerPage);
-        } else {
-            btnNext.setDisable(true);
-        }
-    }
+      gridGameContainer.getChildren().clear();
+      List<Game> games = ApiUtils.fetchGames(page, 18);
+
+      if (games != null && !games.isEmpty()) {
+          int column = 0;
+          int row = 0;
+          for (Game game : games) {
+              try {
+                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/GameContainer.fxml"));
+                  Pane gameContainer = loader.load();
+
+                  GameContainerController controller = loader.getController();
+                  controller.setGame(game);
+
+                  // Agregar evento para redirigir a DescriptionPane
+                  gameContainer.setOnMouseClicked(event -> {
+                      if (mainPaneController != null) {
+                          mainPaneController.loadDescriptionPane(game);
+                      } else {
+                          System.out.println("Error: MainPaneController no está disponible.");
+                      }
+                  });
+
+                  gridGameContainer.add(gameContainer, column, row);
+                  column++;
+                  if (column == 3) {
+                      column = 0;
+                      row++;
+                  }
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
+          }
+      }
+  }
+
     
     /**
      * Obtiene el número de la página actual.
@@ -254,6 +267,8 @@ public class GamesPaneController implements Initializable {
         }
     }
 
+    
+    
     /**
      * Realiza una búsqueda de juegos basada en la consulta proporcionada y actualiza la cuadrícula.
      * <p>
@@ -370,4 +385,84 @@ public class GamesPaneController implements Initializable {
         currentPlatforms = "";
         loadPage(currentPage);
     }
+    
+    /**
+     * Carga los juegos en la cuadrícula de GamesPane.
+     */
+    private void loadGames() {
+      List<Game> games = ApiUtils.fetchGames(currentPage, gamesPerPage); // Obtiene los juegos desde la API
+
+      gridGameContainer.getChildren().clear(); // Limpia la cuadrícula antes de agregar nuevos juegos
+
+      int column = 0;
+      int row = 0;
+
+      for (Game game : games) {
+          try {
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/GameContainer.fxml"));
+              Pane gameContainer = loader.load();
+
+              GameContainerController controller = loader.getController();
+              controller.setGame(game);
+              
+              controller.setOnClickAction(() -> gameSelected(game));
+
+              // 🔹 Añadir evento de clic para seleccionar el juego
+              gameContainer.setOnMouseClicked(event -> {
+                  System.out.println("Juego seleccionado: " + game.getName()); // Debugging
+                  gameSelected(game);
+              });
+
+              gridGameContainer.add(gameContainer, column, row);
+              column++;
+              if (column == 3) {
+                  column = 0;
+                  row++;
+              }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+      }
+  }
+
+
+
+    /**
+     * Agrega un efecto de hover a los contenedores de juego.
+     */
+    private void addHoverEffect(Pane pane) {
+        Scale scaleUp = new Scale(1.1, 1.1, pane.getWidth() / 2, pane.getHeight() / 2);
+        Scale scaleDown = new Scale(1.0, 1.0, pane.getWidth() / 2, pane.getHeight() / 2);
+      
+        DropShadow shadowEffect = new DropShadow();
+        shadowEffect.setRadius(15);
+
+        pane.setOnMouseEntered(event -> {
+            pane.getTransforms().add(scaleUp);
+            pane.setEffect(shadowEffect);
+        });
+
+        pane.setOnMouseExited(event -> {
+            pane.getTransforms().remove(scaleUp);
+            pane.getTransforms().add(scaleDown);
+            pane.setEffect(null);
+        });
+    }
+
+    /**
+     * Permite que el MainPaneController sea inyectado en este controlador.
+     */
+    public void setMainPaneController(MainPaneController mainPaneController) {
+      this.mainPaneController = mainPaneController;
+  }
+    
+    public void gameSelected(Game game) {
+      if (mainPaneController != null) {
+          System.out.println("Enviando a DescriptionPane: " + game.getName()); // Debugging
+          mainPaneController.loadDescriptionPane(game);
+      } else {
+          System.out.println("Error: mainPaneController no está inicializado.");
+      }
+  }
+
 }

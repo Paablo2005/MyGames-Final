@@ -1,32 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import org.controlsfx.control.CheckComboBox?>
 
-<BorderPane prefHeight="70.4" prefWidth="604.0"
-    xmlns="http://javafx.com/javafx/23.0.1"
-    xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="controllers.HeaderPaneController"
-    stylesheets="/styles/HeaderPaneStyles.css"
-    styleClass="header-borderpane">
-    <left>
-        <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0"
-                  prefHeight="70.4" prefWidth="709.6"
-                  BorderPane.alignment="CENTER"
-                  styleClass="header-flowpane">
-            <children>
-                <TextField fx:id="txtSearch" prefHeight="40.0" prefWidth="150.0" />
-                <Button fx:id="btnSearch" mnemonicParsing="false" text="SEARCH" styleClass="search-button" />
-                <!-- CheckComboBox para Plataformas -->
-                <CheckComboBox fx:id="comboPlatform" prefHeight="26.0" prefWidth="113.0" title="Platforms" styleClass="combo-box"/>
-                <!-- CheckComboBox para Géneros -->
-                <CheckComboBox fx:id="comboGenre" prefHeight="26.0" prefWidth="113.0" title="Genres" styleClass="combo-box"/>
-                <Button fx:id="btnFilter" mnemonicParsing="false" text="FILTER" styleClass="filter-button" />
-                <Button fx:id="btnDeleteFilters" mnemonicParsing="false" text="DELETE FILTERS" styleClass="delete-filters-button" />
-            </children>
-        </FlowPane>
-    </left>
+<BorderPane prefHeight="70.4" prefWidth="604.0" style="-fx-background-color: #0F0E17;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" prefHeight="84.0" prefWidth="604.0" style="-fx-background-color: #0F0E17;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField prefHeight="40.0" prefWidth="204.0" text="Search..." />
+            <ComboBox prefHeight="26.0" prefWidth="113.0" promptText="Platform" />
+            <ComboBox prefHeight="26.0" prefWidth="113.0" promptText="Genre" />
+            <CheckBox mnemonicParsing="false" text="Not Played" textFill="WHITE" />
+         </children>
+      </FlowPane>
+   </left>
 </BorderPane>

@@ -1,34 +1,31 @@
 package models;
 
-import java.util.Set;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
-@Table(name = "Developers")
+@Table(name = "developers")
 public class Developer {
 
     @Id
-    private int developerPK;
+    @Column(name = "developer_id")
+    private Integer id;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "developers")
-    private Set<Game> games;
+    @Column(name = "slug", nullable = false, unique = true)
+    private String slug;
 
-    public Developer() {}
-    
-	public int getDeveloperPK() {
-		return developerPK;
+    @ManyToMany(mappedBy = "developers")
+    private List<Game> games;
+        
+	public Integer getId() {
+		return id;
 	}
 
-	public void setDeveloperPK(int developerPK) {
-		this.developerPK = developerPK;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -39,11 +36,19 @@ public class Developer {
 		this.name = name;
 	}
 
-	public Set<Game> getGames() {
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public List<Game> getGames() {
 		return games;
 	}
 
-	public void setGames(Set<Game> games) {
+	public void setGames(List<Game> games) {
 		this.games = games;
 	}
     

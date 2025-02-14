@@ -1,42 +1,31 @@
 package models;
 
-import java.util.Set;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
-@Table(name = "Genres")
+@Table(name = "genres")
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int genrePK;
+    @Column(name = "genre_id")
+    private Integer id;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "genres")
-    private Set<Game> games;
+    @Column(name = "slug", nullable = false, unique = true)
+    private String slug;
 
-    public Genre() {}
-    
-    public Genre(int genrePK, String name) {
-    	this.genrePK = genrePK;
-    	this.name = name;
-    }
-    
-	public int getGenrePK() {
-		return genrePK;
+    @ManyToMany(mappedBy = "genreEntities") 
+    private List<Game> games;
+  
+	public Integer getId() {
+		return id;
 	}
 
-	public void setGenrePK(int genrePK) {
-		this.genrePK = genrePK;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -47,11 +36,20 @@ public class Genre {
 		this.name = name;
 	}
 
-	public Set<Game> getGames() {
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public List<Game> getGames() {
 		return games;
 	}
 
-	public void setGames(Set<Game> games) {
+	public void setGames(List<Game> games) {
 		this.games = games;
-	}
-}
+	}    
+    
+}	

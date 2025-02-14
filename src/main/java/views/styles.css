@@ -1,0 +1,20 @@
+.main-background {
+    -fx-background-color: linear-gradient(
+        from 0% 0% to 100% 100%,
+        #005599 6%,
+        #545466 100%
+    );
+}
+
+.button:hover {
+    -fx-background-color: #FF4570;
+}
+
+.home-title {
+    -fx-background-image: url("../../../src/main/resources/Images/homeTitle.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}

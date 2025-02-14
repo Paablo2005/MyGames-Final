@@ -1,10 +1,9 @@
-package controllers; 
+package controllers;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -28,8 +27,11 @@ public class LoginDataController {
     @FXML
     private Label btnLogin;
 
+    private UserDaoImpl userDaoImpl;
+
     @FXML
     private void initialize() {
+        userDaoImpl = new UserDaoImpl();
         btnLogin.setOnMouseClicked(event -> handleLoginClick(event));
     }
 
@@ -41,19 +43,19 @@ public class LoginDataController {
         if (authenticateUser(email, password)) {
             openMainPane();
         } else {
-            showAlert("Invalid email or password.", Alert.AlertType.ERROR);
+            System.out.println("Invalid email or password.");
         }
     }
 
     /**
-     * Authenticate the user by comparing the hashed password entered with the one stored in the database.
+     * Método para autenticar al usuario comparando el hash de la contraseña ingresada
+     * con la almacenada en la base de datos.
      */
     private boolean authenticateUser(String email, String password) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            UserDaoImpl userDaoImpl = new UserDaoImpl(session);
-            User user = userDaoImpl.getByEmail(email);
+            User user = userDaoImpl.findByMail(session, email);
 
-            // Compare the hashed password entered with the stored password
+            // Comparar la contraseña encriptada ingresada con la almacenada
             if (user != null && user.getPassword().equals(PasswordUtil.hashPassword(password))) {
                 return true;
             }
@@ -68,40 +70,31 @@ public class LoginDataController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainPane.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
-            stage.setTitle("MyGames");
+            stage.setTitle("Main Pane");
 
             MainPaneController mainPaneController = loader.getController();
             User authenticatedUser = getAuthenticatedUser();
             mainPaneController.setUserData(authenticatedUser);
-            stage.setResizable(false);
+
             stage.show();
 
             Stage currentStage = (Stage) btnLogin.getScene().getWindow();
             currentStage.close();
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Failed to load MainPane.fxml.", Alert.AlertType.ERROR);
+            System.out.println("Failed to load MainPane.fxml.");
         }
     }
 
     private User getAuthenticatedUser() {
         String email = textEmail.getText();
         @SuppressWarnings("unused")
-        String password = textPassword.getText();
+		String password = textPassword.getText();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            UserDaoImpl userDaoImpl = new UserDaoImpl(session);
-            return userDaoImpl.getByEmail(email);
+            return userDaoImpl.findByMail(session, email);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private void showAlert(String message, Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setTitle("Message");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

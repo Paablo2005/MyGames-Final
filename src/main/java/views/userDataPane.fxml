@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,193 +11,211 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" 
-            xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="controllers.UserDataPaneController"
-            stylesheets="/styles/UserDataPaneStyles.css"
-            styleClass="main-background">
-  <top>
-    <Pane prefHeight="40.0" prefWidth="604.0" BorderPane.alignment="CENTER" />
-  </top>
-  <bottom>
-    <Pane prefHeight="41.0" prefWidth="604.0" BorderPane.alignment="CENTER" />
-  </bottom>
-  <left>
-    <Pane prefHeight="278.0" prefWidth="75.0" BorderPane.alignment="CENTER" />
-  </left>
-  <right>
-    <Pane prefHeight="278.0" prefWidth="75.0" BorderPane.alignment="CENTER" />
-  </right>
-  <center>
-    <!-- Contenedor principal de datos con fondo semitransparente -->
-    <BorderPane id="DataContainer" maxHeight="278.4" maxWidth="453.6"
-                prefHeight="160.0" prefWidth="204.0"
-                styleClass="data-container"
-                BorderPane.alignment="CENTER">
-      <top>
-        <Pane prefHeight="20.0" prefWidth="454.0" BorderPane.alignment="CENTER" />
-      </top>
-      <left>
-        <Pane prefHeight="277.0" prefWidth="25.0" BorderPane.alignment="CENTER" />
-      </left>
-      <right>
-        <Pane prefHeight="277.0" prefWidth="25.0" BorderPane.alignment="CENTER" />
-      </right>
-      <bottom>
-        <Pane prefHeight="20.0" prefWidth="454.0" BorderPane.alignment="CENTER" />
-      </bottom>
-      <center>
-        <BorderPane prefHeight="252.0" prefWidth="402.0" BorderPane.alignment="CENTER">
-          <center>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-              <bottom>
-                <GridPane prefHeight="40.0" prefWidth="402.0" BorderPane.alignment="CENTER">
-                  <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                    <!-- Botón "DELETE ACCOUNT" -->
-                    <FlowPane alignment="BOTTOM_LEFT" prefHeight="29.0" prefWidth="202.0">
-                      <children>
-                        <FlowPane alignment="CENTER" prefHeight="30.0" prefWidth="140.0"
-                                  styleClass="delete-button-background">
-                          <children>
-                            <Label fx:id="btnDelete" text="DELETE ACCOUNT"
-                                   styleClass="btn-delete" onMouseClicked="#handleBtnDelete" />
-                          </children>
-                        </FlowPane>
-                      </children>
-                    </FlowPane>
-                    <!-- Botones Save, Cancel y Edit -->
-                    <FlowPane alignment="CENTER" hgap="20.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                      <children>
-                        <Label fx:id="btnSave" onMouseClicked="#handleBtnSaveClick" prefHeight="45.0" prefWidth="45.0"
-                               styleClass="btn-save" visible="false" />
-                        <Label fx:id="btnCancel" onMouseClicked="#handleBtnCancelClick" prefHeight="45.0" prefWidth="45.0"
-                               styleClass="btn-cancel" visible="false" />
-                        <Label fx:id="btnEdit" onMouseClicked="#handleBtnEditClick" prefHeight="45.0" prefWidth="45.0"
-                               styleClass="btn-edit" />
-                      </children>
-                    </FlowPane>
-                  </children>
-                </GridPane>
-              </bottom>
-              <center>
-                <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                  <right>
-                    <BorderPane prefHeight="248.0" prefWidth="150.0" BorderPane.alignment="CENTER">
-                      <bottom>
-                        <FlowPane prefHeight="48.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
-                      </bottom>
-                      <center>
-                        <BorderPane prefHeight="158.0" prefWidth="150.0" BorderPane.alignment="CENTER">
-                          <center>
-                            <Pane fx:id="paneImgProfile" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                              <children>
-                                <Button fx:id="btnUploadImage" onMouseClicked="#handleBtnUploadImage"
-                                        layoutX="24.0" layoutY="63.0" mnemonicParsing="false"
-                                        text="UPLOAD IMAGE" visible="false" />
-                              </children>
-                            </Pane>
-                          </center>
-                        </BorderPane>
-                      </center>
-                    </BorderPane>
-                  </right>
-                  <center>
-                    <GridPane BorderPane.alignment="CENTER">
-                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      </columnConstraints>
-                      <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      </rowConstraints>
-                      <children>
-                        <!-- Fila: Username -->
-                        <GridPane>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                          <children>
-                            <Label text="USERNAME">
-                              <font>
-                                <Font name="Consolas" size="12.0" />
-                              </font>
-                            </Label>
-                            <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                              <children>
-                                <TextField fx:id="txtUsername" disable="true" prefWidth="225.0"
-                                           promptText="Username" />
-                              </children>
-                            </FlowPane>
-                          </children>
-                        </GridPane>
-                        <!-- Fila: Mail -->
-                        <GridPane GridPane.rowIndex="1">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                          <children>
-                            <Label text="MAIL">
-                              <font>
-                                <Font name="Consolas" size="12.0" />
-                              </font>
-                            </Label>
-                            <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                              <children>
-                                <TextField fx:id="txtMail" disable="true" prefHeight="26.0" prefWidth="225.0"
-                                           promptText="Mail" />
-                              </children>
-                            </FlowPane>
-                          </children>
-                        </GridPane>
-                        <!-- Fila: Password -->
-                        <GridPane GridPane.rowIndex="2">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                          <children>
-                            <Label text="PASSWORD">
-                              <font>
-                                <Font name="Consolas" size="12.0" />
-                              </font>
-                            </Label>
-                            <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                              <children>
-                                <PasswordField fx:id="password" disable="true" minWidth="0.0"
-                                               prefHeight="26.4" prefWidth="225.6" />
-                              </children>
-                            </FlowPane>
-                          </children>
-                        </GridPane>
-                      </children>
-                    </GridPane>
-                  </center>
-                </BorderPane>
-              </center>
-            </BorderPane>
-          </center>
-        </BorderPane>
-      </center>
-    </BorderPane>
-  </center>
+<BorderPane style="-fx-background-image: url('Images/GradientBackground.png'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<top>
+		<Pane prefHeight="40.0" prefWidth="604.0" BorderPane.alignment="CENTER" />
+	</top>
+	<bottom>
+		<Pane prefHeight="41.0" prefWidth="604.0" BorderPane.alignment="CENTER" />
+	</bottom>
+	<left>
+		<Pane prefHeight="278.0" prefWidth="75.0" BorderPane.alignment="CENTER" />
+	</left>
+	<right>
+		<Pane prefHeight="278.0" prefWidth="75.0" BorderPane.alignment="CENTER" />
+	</right>
+	<center>
+		<BorderPane id="DataContainer" maxHeight="278.4" maxWidth="453.6" prefHeight="160.0" prefWidth="204.0" style="-fx-background-color: rgba(255, 255, 255, 0.6);" BorderPane.alignment="CENTER">
+			<top>
+				<Pane prefHeight="20.0" prefWidth="454.0" BorderPane.alignment="CENTER" />
+			</top>
+			<left>
+				<Pane prefHeight="277.0" prefWidth="25.0" BorderPane.alignment="CENTER" />
+			</left>
+			<right>
+				<Pane prefHeight="277.0" prefWidth="25.0" BorderPane.alignment="CENTER" />
+			</right>
+			<bottom>
+				<Pane prefHeight="20.0" prefWidth="454.0" BorderPane.alignment="CENTER" />
+			</bottom>
+			<center>
+				<BorderPane prefHeight="252.0" prefWidth="402.0" BorderPane.alignment="CENTER">
+					<center>
+						<BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+							<bottom>
+								<GridPane prefHeight="40.0" prefWidth="402.0" BorderPane.alignment="CENTER">
+									<columnConstraints>
+										<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+										<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+									</rowConstraints>
+									<children>
+										<FlowPane alignment="BOTTOM_LEFT" prefHeight="29.0" prefWidth="202.0">
+											<children>
+												<FlowPane alignment="CENTER" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: RED;">
+													<children>
+														<Label text="DELETE ACCOUNT" textFill="WHITE">
+															<font>
+																<Font name="Consolas" size="12.0" />
+															</font>
+														</Label>
+													</children>
+												</FlowPane>
+											</children>
+										</FlowPane>
+										<FlowPane alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+											<children>
+												<Label id="lblEditImg" prefHeight="40.0" prefWidth="40.0" />
+											</children>
+										</FlowPane>
+									</children>
+								</GridPane>
+							</bottom>
+							<center>
+								<BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+									<right>
+										<BorderPane prefHeight="248.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+											<bottom>
+												<FlowPane prefHeight="48.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
+											</bottom>
+											<center>
+												<BorderPane prefHeight="158.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+													<center>
+														<Label id="lblProfileImg" fx:id="lblProfileImage" prefHeight="176.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
+													</center>
+												</BorderPane>
+											</center>
+										</BorderPane>
+									</right>
+									<center>
+										<GridPane BorderPane.alignment="CENTER">
+											<columnConstraints>
+												<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+											</columnConstraints>
+											<rowConstraints>
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+											</rowConstraints>
+											<children>
+												<GridPane>
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label text="USERNAME">
+															<font>
+																<Font name="Consolas" size="12.0" />
+															</font>
+														</Label>
+														<FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <TextField fx:id="txtUsername" prefWidth="225.0" />
+                                             </children>
+														</FlowPane>
+													</children>
+												</GridPane>
+												<GridPane GridPane.rowIndex="1">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label text="NAME">
+															<font>
+																<Font name="Consolas" size="12.0" />
+															</font>
+														</Label>
+														<FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <TextField fx:id="txtName" prefHeight="26.0" prefWidth="225.0" />
+                                             </children>
+														</FlowPane>
+													</children>
+												</GridPane>
+												<GridPane GridPane.rowIndex="2">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label text="SURNAMES">
+															<font>
+																<Font name="Consolas" size="12.0" />
+															</font>
+														</Label>
+														<FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <TextField fx:id="txtSurnames" prefWidth="225.0" />
+                                             </children>
+														</FlowPane>
+													</children>
+												</GridPane>
+												<GridPane GridPane.rowIndex="3">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label text="MAIL">
+															<font>
+																<Font name="Consolas" size="12.0" />
+															</font>
+														</Label>
+                                          <TextField fx:id="txtMail" maxWidth="225.6" prefHeight="26.0" prefWidth="225.6" GridPane.rowIndex="1" />
+													</children>
+												</GridPane>
+												<GridPane GridPane.rowIndex="4">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label text="PLATFORMS">
+															<font>
+																<Font name="Consolas" size="12.0" />
+															</font>
+														</Label>
+														<FlowPane hgap="15.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+															<children>
+																<CheckBox mnemonicParsing="false" text="PC" />
+																<CheckBox mnemonicParsing="false" text="PS5" />
+																<CheckBox mnemonicParsing="false" text="XBOX" />
+																<CheckBox mnemonicParsing="false" text="SWITCH" />
+															</children>
+														</FlowPane>
+													</children>
+												</GridPane>
+											</children>
+										</GridPane>
+
+									</center>
+								</BorderPane>
+							</center>
+						</BorderPane>
+					</center>
+				</BorderPane>
+			</center>
+		</BorderPane>
+	</center>
 </BorderPane>

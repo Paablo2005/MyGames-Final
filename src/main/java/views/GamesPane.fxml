@@ -11,38 +11,36 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="629.6" prefWidth="709.6" 
-            xmlns="http://javafx.com/javafx/23.0.1" 
-            xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="controllers.GamesPaneController"
-            stylesheets="/styles/GamesPaneStyles.css"
-            styleClass="games-borderpane">
+<BorderPane prefHeight="629.6" prefWidth="709.6" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GamesPaneController">
     <center>
         <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" vbarPolicy="NEVER">
             <content>
-                <BorderPane styleClass="gradient-background">
+                <BorderPane style="-fx-background-image: url('Images/GradientBackground.png'); -fx-background-size: cover;">
                     <top>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" 
-                              BorderPane.alignment="CENTER" styleClass="title-container">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <padding>
                                 <Insets bottom="30.0" left="10.0" right="10.0" top="30.0" />
                             </padding>
                             <children>
-                                <Pane fx:id="titlePane" maxHeight="-Infinity" maxWidth="-Infinity" 
-                                      minHeight="-Infinity" minWidth="-Infinity" 
-                                      prefHeight="222.0" prefWidth="643.0" 
-                                      styleClass="title-pane">
+                                <Pane fx:id="titlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="643.0" style="-fx-background-image: url('Images/CollectionImage.png'); -fx-background-size: cover; -fx-background-position: center;">
                                     <children>
-                                        <Pane fx:id="paneDescription" layoutX="53.0" layoutY="44.0" 
-                                              prefHeight="135.0" prefWidth="320.0" 
-                                              styleClass="description-pane">
+                                        <Pane fx:id="paneDescription" layoutX="53.0" layoutY="44.0" prefHeight="135.0" prefWidth="320.0" style="-fx-background-color: rgba(0, 0, 0, 0.7);">
                                             <children>
-                                                <Label layoutX="11.0" layoutY="14.0" text="MyGames" 
-                                                       styleClass="title-text" />
-                                                <Label layoutX="11.0" layoutY="59.0" text="Games Library" 
-                                                       styleClass="library-text" />
-                                                <Label layoutX="11.0" layoutY="104.0" text="The great video game library" 
-                                                       styleClass="subtitle-text" />
+                                                <Label layoutX="11.0" layoutY="14.0" text="MyGames" textFill="#2d14d1">
+                                                    <font>
+                                                        <Font name="Consolas Bold" size="25.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label layoutX="11.0" layoutY="59.0" text="Games Library" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Consolas" size="25.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label layoutX="11.0" layoutY="104.0" text="The great video game library" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Consolas" size="13.0" />
+                                                    </font>
+                                                </Label>
                                             </children>
                                         </Pane>
                                     </children>
@@ -51,20 +49,28 @@
                         </HBox>
                     </top>
                     <center>
-                        <GridPane fx:id="gridGameContainer" alignment="CENTER" hgap="40" vgap="10" 
-                                  styleClass="game-grid"/>
+                        <GridPane fx:id="gridGameContainer" alignment="CENTER" hgap="40" vgap="10">
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </padding>
+                        </GridPane>
                     </center>
-                    <bottom>
-                        <FlowPane alignment="CENTER" hgap="20.0" prefHeight="50.0" prefWidth="708.0" 
-                                  BorderPane.alignment="CENTER" styleClass="navigation-pane">
-                            <children>
-                                <Button fx:id="btnPrevious" mnemonicParsing="false" onAction="#loadPreviousPage" 
-                                        text="Previous" styleClass="prev-button"/>
-                                <Button fx:id="btnNext" mnemonicParsing="false" onAction="#loadNextPage" 
-                                        text="Next" styleClass="next-button"/>
-                            </children>
-                        </FlowPane>
-                    </bottom>
+               <bottom>
+                  <FlowPane alignment="CENTER" hgap="20.0" prefHeight="50.0" prefWidth="708.0" BorderPane.alignment="CENTER">
+                     <children>
+                                <Button fx:id="btnPrevious" mnemonicParsing="false" onAction="#loadPreviousPage" text="Previous">
+                                    <font>
+                                        <Font name="Consolas Bold" size="15.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="btnNext" mnemonicParsing="false" onAction="#loadNextPage" text="Next">
+                                    <font>
+                                        <Font name="Consolas Bold" size="15.0" />
+                                    </font>
+                                </Button>
+                     </children>
+                  </FlowPane>
+               </bottom>
                 </BorderPane>
             </content>
         </ScrollPane>

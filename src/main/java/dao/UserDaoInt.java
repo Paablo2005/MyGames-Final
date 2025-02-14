@@ -1,24 +1,10 @@
 package dao;
 
-import java.sql.SQLException;
-
+import jakarta.persistence.EntityManager;
 import models.User;
+import java.util.List;
 
-public interface UserDaoInt {
-	/**
-	 * Busca un usuario por correo electrónico, que es único e irrepetible
-	 * @param email
-	 * @return - Usuario cuyo correo coincida con el proporcionado
-	 * @throws SQLException
-	 */
-	User getByEmail(String email) throws SQLException;
-	
-	/**
-	 * Buscamos a un usuario por ID específico
-	 * @param id
-	 * @return - Usuario encontrado con el ID proporcionado
-	 * @throws SQLException
-	 */
-	User getById(int id) throws SQLException;
-	
+public interface UserDaoInt extends CommonDaoInt<User> {
+    User findByMail(EntityManager em, String mail);
+    List<User> findByUserName(EntityManager em, String userName);
 }

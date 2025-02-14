@@ -18,9 +18,8 @@ public class Main extends Application {
 
             Scene scene = new Scene(root);
 
-            primaryStage.setTitle("MyGames");
+            primaryStage.setTitle("Mi Aplicación JavaFX");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

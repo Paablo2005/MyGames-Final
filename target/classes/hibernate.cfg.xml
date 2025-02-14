@@ -2,10 +2,10 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost:3306/projectmygames?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC
+            jdbc:mysql://localhost:3306/my_games?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC
         </property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">2005</property>
+        <property name="hibernate.connection.password">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
@@ -16,11 +16,10 @@
         
         <!-- Mapear tus clases -->
         <mapping class="models.User"/>
-        <mapping class="models.Game"/>
-        <mapping class="models.Collection"/>
-        <mapping class="models.Platforms"/>
         <mapping class="models.Developer"/>
-        <mapping class="models.Images"/>
+        <mapping class="models.Game"/>
+        <mapping class="models.GameImage"/>
         <mapping class="models.Genre"/>
+        <mapping class="models.Platform"/>
     </session-factory>
 </hibernate-configuration>

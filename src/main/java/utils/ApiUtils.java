@@ -4,6 +4,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import models.Game;
+import models.Genre;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -48,27 +49,84 @@ public class ApiUtils {
      * @return una lista de objetos {@link models.Game} extraídos de la respuesta JSON.
      */
     private static List<Game> getGamesFromUrl(String url) {
-        String response = makeRequest(url);
-        List<Game> games = new ArrayList<>();
-        if (response != null) {
-            JSONObject jsonResponse = new JSONObject(response);
-            JSONArray results = jsonResponse.getJSONArray("results");
-            
-            for (int i = 0; i < results.length(); i++) {
-                JSONObject gameObj = results.getJSONObject(i);
-                String name = gameObj.getString("name");
-                String imageUrl = gameObj.optString("background_image", "");
-                
-                System.out.println("Game " + (i + 1) + " - Name: " + name + ", Image URL: " + imageUrl);
-                
-                Game game = new Game();
-                game.setName(name);
-                game.setPrincipalImg(imageUrl);
-                games.add(game);
-            }
-        }
-        return games;
-    }
+      String response = makeRequest(url);
+      List<Game> games = new ArrayList<>();
+
+      if (response != null) {
+          JSONObject jsonResponse = new JSONObject(response);
+          JSONArray results = jsonResponse.getJSONArray("results");
+
+          for (int i = 0; i < results.length(); i++) {
+              JSONObject gameObj = results.getJSONObject(i);
+              String name = gameObj.getString("name");
+              String imageUrl = gameObj.optString("background_image", "");
+
+              // Obtener descripción del juego
+              String description = "";
+              try {
+                  String gameDetailsUrl = "https://api.rawg.io/api/games/" + gameObj.getInt("id") + "?key=" + API_KEY;
+                  String detailsResponse = makeRequest(gameDetailsUrl);
+                  if (detailsResponse != null) {
+                      JSONObject detailsJson = new JSONObject(detailsResponse);
+                      description = detailsJson.optString("description_raw", "Descripción no disponible.");
+                  }
+              } catch (Exception e) {
+                  System.out.println("No se pudo obtener la descripción para " + name);
+              }
+
+              // Obtener géneros
+              JSONArray genresArray = gameObj.optJSONArray("genres");
+              String genres = "";
+              if (genresArray != null) {
+                  List<String> genreList = new ArrayList<>();
+                  for (int j = 0; j < genresArray.length(); j++) {
+                      genreList.add(genresArray.getJSONObject(j).getString("name"));
+                  }
+                  genres = String.join(", ", genreList);
+              }
+
+              // Obtener plataformas
+              JSONArray platformsArray = gameObj.optJSONArray("platforms");
+              String platforms = "";
+              if (platformsArray != null) {
+                  List<String> platformList = new ArrayList<>();
+                  for (int j = 0; j < platformsArray.length(); j++) {
+                      platformList.add(platformsArray.getJSONObject(j).getJSONObject("platform").getString("name"));
+                  }
+                  platforms = String.join(", ", platformList);
+              }
+
+              // Obtener capturas de pantalla
+              String screenshot1 = "", screenshot2 = "", screenshot3 = "";
+              try {
+                  String screenshotsUrl = "https://api.rawg.io/api/games/" + gameObj.getInt("id") + "/screenshots?key=" + API_KEY;
+                  String screenshotsResponse = makeRequest(screenshotsUrl);
+                  if (screenshotsResponse != null) {
+                      JSONArray screenshotsArray = new JSONObject(screenshotsResponse).getJSONArray("results");
+                      if (screenshotsArray.length() > 0) screenshot1 = screenshotsArray.getJSONObject(0).getString("image");
+                      if (screenshotsArray.length() > 1) screenshot2 = screenshotsArray.getJSONObject(1).getString("image");
+                      if (screenshotsArray.length() > 2) screenshot3 = screenshotsArray.getJSONObject(2).getString("image");
+                  }
+              } catch (Exception e) {
+                  System.out.println("No se pudieron obtener capturas de pantalla para " + name);
+              }
+
+              // Crear objeto Game y asignar datos
+              Game game = new Game();
+              game.setName(name);
+              game.setPrincipalImg(imageUrl);
+              game.setDescription(description);
+              game.setGenres(genres);
+              game.setPlatforms(platforms);
+              game.setScreenshot1(screenshot1);
+              game.setScreenshot2(screenshot2);
+              game.setScreenshot3(screenshot3);
+
+              games.add(game);
+          }
+      }
+      return games;
+  }
     
     /**
      * Realiza una solicitud HTTP GET a la URL especificada.

@@ -1,96 +1,66 @@
 package dao;
 
-import org.hibernate.Session;
-import org.hibernate.resource.transaction.spi.TransactionStatus;
-
-import java.lang.reflect.ParameterizedType;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import java.util.List;
 
-/**
- * Clase con el DAO generico, CommonDaoImpl
- * 
- */
-public class CommonDaoImpl<T> implements CommonDaoInt<T> {
+public abstract class CommonDaoImpl<T> implements CommonDaoInt<T> {
+    private final Class<T> entityClass;
 
-	/** Tipo de clase */
-	private Class<T> entityClass;
+    protected CommonDaoImpl(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
 
-	/** Sesion de conexion a BD */
-	private Session session;
+    @Override
+    public T findById(EntityManager em, Object id) {
+        return em.find(entityClass, id);
+    }
 
-	/**
-	 * Constructor de la clase
-	 * 
-	 * @param session Session de la base de datos
-	 */
-	@SuppressWarnings("unchecked")
-	protected CommonDaoImpl(Session session) {
-		setEntityClass(
-				(Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
-		this.session = session;
-	}
+    @Override
+    public List<T> findAll(EntityManager em) {
+        String query = "SELECT e FROM " + entityClass.getSimpleName() + " e";
+        return em.createQuery(query, entityClass).getResultList();
+    }
 
-	/**
-	 * Metodo insert, que inserta un objeto en la base de datos
-	 */
-	public void insert(final T paramT) {
-		if (!session.getTransaction().getStatus().equals(TransactionStatus.ACTIVE)) {
-			session.getTransaction().begin();
-		}
+    @Override
+    public void save(EntityManager em, T entity) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.persist(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw e;
+        }
+    }
 
-		session.merge(paramT);
-		session.flush();
-		session.getTransaction().commit();
-	}
+    @Override
+    public void update(EntityManager em, T entity) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.merge(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw e;
+        }
+    }
 
-	/**
-	 * Metodo que modifica un objeto de la base de datos
-	 */
-	public void update(final T paramT) {
-		if (!session.getTransaction().getStatus().equals(TransactionStatus.ACTIVE)) {
-			session.getTransaction().begin();
-		}
-
-		session.merge(paramT);
-		session.getTransaction().commit();
-	}
-
-	/**
-	 * Metodo que elimina un objeto de la base de datos
-	 */
-	public void delete(final T paramT) {
-		if (!session.getTransaction().getStatus().equals(TransactionStatus.ACTIVE)) {
-			session.getTransaction().begin();
-		}
-
-		session.remove(paramT);
-		session.getTransaction().commit();
-	}
-
-
-	/**
-	 * Metodo que lista todos los objetos de la base de datos
-	 */
-	public List<T> searchAll() {
-		if (!session.getTransaction().getStatus().equals(TransactionStatus.ACTIVE)) {
-			session.getTransaction().begin();
-		}
-
-		// Devuelve todos los objetos
-		return session.createQuery("FROM " + this.entityClass.getName(), this.entityClass).list();
-	}
-
-	/**
-	 * @return the entityClass
-	 */
-	public Class<T> getEntityClass() {
-		return entityClass;
-	}
-
-	/**
-	 * @param entityClass the entityClass to set
-	 */
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
-	}
+    @Override
+    public void delete(EntityManager em, Object id) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            T entity = em.find(entityClass, id);
+            if (entity != null) {
+                em.remove(entity);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw e;
+        }
+    }
 }
