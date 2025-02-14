@@ -16,6 +16,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -357,7 +358,12 @@ public class UserDataPaneController implements Initializable{
         originalPictureUrl = user.getPicture();
         
         // Configurar la imagen de perfil
-        Image userImage = new Image(user.getPicture());
+        Image userImage;
+        try {
+        	userImage = new Image(user.getPicture());        	
+        } catch (Exception e) {
+        	userImage = new Image("images/ProfileImage.png");
+        }
         BackgroundImage backgroundImage = new BackgroundImage(
                 userImage,
                 BackgroundRepeat.NO_REPEAT,
@@ -373,6 +379,22 @@ public class UserDataPaneController implements Initializable{
             listenersAdded = true;
         }
     }
+    
+	public void loadUserImage(Pane pane, String url) {
+		// File para comprobar el origen del URL
+		File file = new File(url);
+		File defaultImage = new File("src/main/resources/Images/ProfileImage.png");
+		
+		if (file.exists() || file.isFile()) {
+			pane.setStyle("-fx-background-image: url('"+file.toURI().toString()+"'); "
+					+ "-fx-background-size: cover; "
+					+ "-fx-background-position: center;");
+		} else {
+			pane.setStyle("-fx-background-image: url('"+defaultImage.toURI().toString()+"'); "
+					+ "-fx-background-size: cover; "
+					+ "-fx-background-position: center;");
+		}
+	}
     
     /**
      * Agrega listeners a los campos de texto para detectar modificaciones.

@@ -9,13 +9,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
 <?import org.controlsfx.control.Rating?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="629.6" prefWidth="709.6" stylesheets="@styles.css"
-            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controllers.CollectionGameInfoPaneController" styleClass="/styles/CollectionGameInfoEditPane.css">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.6" prefWidth="709.6" style="-fx-background-image: url('Images/GradientBackground.png'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CollectionGameInfoEditPaneController">
    <top>
       <FlowPane prefHeight="20.0" prefWidth="710.0" BorderPane.alignment="CENTER" />
    </top>
@@ -25,32 +23,40 @@
    <bottom>
       <FlowPane alignment="CENTER" hgap="23.0" prefHeight="175.0" prefWidth="710.0" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane fx:id="paneImage1" prefHeight="146.4" prefWidth="205.6" styleClass="image-pane">
+            <BorderPane fx:id="paneImage1" prefHeight="146.4" prefWidth="205.6" style="-fx-background-color: red;">
                <center>
-                  <Button fx:id="btnUploadImage1" mnemonicParsing="false" text="UPLOAD IMAGE"
-                          BorderPane.alignment="CENTER" styleClass="upload-button"/>
+                  <Button fx:id="btnUploadImage1" mnemonicParsing="false" onMouseClicked="#uploadImage1" text="UPLOAD IMAGE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font>
+                  </Button>
                </center>
             </BorderPane>
-            <BorderPane fx:id="paneImage2" prefHeight="146.4" prefWidth="205.6" styleClass="image-pane">
+            <BorderPane fx:id="paneImage2" prefHeight="146.4" prefWidth="205.6" style="-fx-background-color: red;">
                <center>
-                  <Button fx:id="btnUploadImage2" mnemonicParsing="false" text="UPLOAD IMAGE"
-                          BorderPane.alignment="CENTER" styleClass="upload-button"/>
+                  <Button fx:id="btnUploadImage2" mnemonicParsing="false" onMouseClicked="#uploadImage2" text="UPLOAD IMAGE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font>
+                  </Button>
                </center>
             </BorderPane>
-            <BorderPane fx:id="paneImage3" prefHeight="146.4" prefWidth="205.6" styleClass="image-pane">
+            <BorderPane fx:id="paneImage3" prefHeight="146.4" prefWidth="205.6" style="-fx-background-color: red;">
                <center>
-                  <Button fx:id="btnUploadImage3" mnemonicParsing="false" text="UPLOAD IMAGE"
-                          BorderPane.alignment="CENTER" styleClass="upload-button"/>
+                  <Button fx:id="btnUploadImage3" mnemonicParsing="false" onMouseClicked="#uploadImage3" text="UPLOAD IMAGE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font>
+                  </Button>
                </center>
             </BorderPane>
-         </children>
-      </FlowPane>
+         </children></FlowPane>
    </bottom>
    <right>
       <FlowPane prefHeight="459.0" prefWidth="20.0" BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <BorderPane prefHeight="459.0" prefWidth="378.0" styleClass="translucent-pane" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="459.0" prefWidth="378.0" style="-fx-background-color: rgba(255, 255, 255, 0.6);" BorderPane.alignment="CENTER">
          <left>
             <Pane prefHeight="200.0" prefWidth="12.0" BorderPane.alignment="CENTER" />
          </left>
@@ -66,12 +72,14 @@
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <center>
-                  <FlowPane orientation="VERTICAL" prefHeight="146.0" prefWidth="646.0"
-                            BorderPane.alignment="CENTER">
+                  <FlowPane orientation="VERTICAL" prefHeight="146.0" prefWidth="646.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label text="Commentary" styleClass="bold-label-15"/>
-                        <TextArea fx:id="txtCommentary" prefHeight="100.0" prefWidth="562.4"
-                                  promptText="ENTER COMMENTARY" wrapText="true" />
+                        <Label text="Commentary">
+                           <font>
+                              <Font name="Consolas Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="txtCommentary" prefHeight="100.0" prefWidth="562.4" promptText="ENTER COMMENTARY" wrapText="true" />
                      </children>
                   </FlowPane>
                </center>
@@ -80,40 +88,40 @@
                      <left>
                         <BorderPane prefHeight="226.0" prefWidth="380.0" BorderPane.alignment="CENTER">
                            <bottom>
-                              <FlowPane orientation="VERTICAL" prefHeight="52.8" prefWidth="380.0"
-                                        BorderPane.alignment="CENTER">
+                              <FlowPane orientation="VERTICAL" prefHeight="52.8" prefWidth="380.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Label text="Platform" styleClass="bold-label-15"/>
-                                    <CheckComboBox fx:id="comboPlatform" prefHeight="26.0" prefWidth="113.0"
-                                                   title="Platforms" />
-                                 </children>
-                              </FlowPane>
+                                    <Label text="Platform">
+                                       <font>
+                                          <Font name="Consolas Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <CheckComboBox fx:id="comboPlatform" prefHeight="26.0" prefWidth="113.0" title="Platforms" />
+                                 </children></FlowPane>
                            </bottom>
                            <center>
-                              <FlowPane orientation="VERTICAL" prefHeight="58.0" prefWidth="380.0"
-                                        BorderPane.alignment="CENTER">
+                              <FlowPane orientation="VERTICAL" prefHeight="58.0" prefWidth="380.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Label text="Developer / Studio" styleClass="bold-label-15"/>
-                                    <TextField fx:id="txtStudio" prefHeight="26.0" prefWidth="380.0"
-                                               promptText="ENTER DEVELOPER / STUDIO" />
-                                 </children>
-                              </FlowPane>
+                                    <Label text="Developer / Studio">
+                                       <font>
+                                          <Font name="Consolas Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtStudio" prefHeight="26.0" prefWidth="380.0" promptText="ENTER DEVELOPER / STUDIO" />
+                                 </children></FlowPane>
                            </center>
                            <top>
                               <BorderPane prefHeight="120.0" prefWidth="380.0" BorderPane.alignment="CENTER">
                                  <top>
                                     <FlowPane prefHeight="28.0" prefWidth="380.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <TextField fx:id="txtTitle" prefHeight="26.0" prefWidth="380.0"
-                                                     promptText="ENTER TITLE" />
+                                          <TextField fx:id="txtTitle" prefHeight="26.0" prefWidth="380.0" promptText="ENTER TITLE" />
                                        </children>
                                     </FlowPane>
                                  </top>
                                  <center>
                                     <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <TextArea fx:id="txtDescription" prefHeight="92.0" prefWidth="380.0"
-                                                    promptText="ENTER DESCRIPTION" wrapText="true" />
+                                          <TextArea fx:id="txtDescription" prefHeight="92.0" prefWidth="380.0" promptText="ENTER DESCRIPTION" wrapText="true" />
                                        </children>
                                     </FlowPane>
                                  </center>
@@ -129,80 +137,85 @@
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <top>
-                                    <FlowPane alignment="CENTER" prefHeight="140.0" prefWidth="230.0"
-                                              BorderPane.alignment="CENTER">
+                                    <FlowPane alignment="CENTER" prefHeight="140.0" prefWidth="230.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <BorderPane fx:id="paneImage" prefHeight="140.0" prefWidth="230.4"
-                                                      styleClass="image-pane">
+                                          <BorderPane fx:id="paneImage" prefHeight="140.0" prefWidth="230.4" style="-fx-background-color: red;">
                                              <center>
-                                                <Button fx:id="btnUploadImage" mnemonicParsing="false"
-                                                        text="UPLOAD IMAGE" BorderPane.alignment="CENTER"
-                                                        styleClass="upload-button"/>
+                                                <Button fx:id="btnUploadImage" mnemonicParsing="false" onMouseClicked="#uploadImage" text="UPLOAD IMAGE" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font name="Consolas" size="12.0" />
+                                                   </font>
+                                                </Button>
                                              </center>
                                           </BorderPane>
                                        </children>
                                     </FlowPane>
                                  </top>
                                  <bottom>
-                                    <FlowPane alignment="CENTER_RIGHT" prefHeight="42.2" prefWidth="230.0"
-                                              BorderPane.alignment="CENTER">
+                                    <FlowPane alignment="CENTER_RIGHT" prefHeight="42.2" prefWidth="230.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label text="Finish Date" styleClass="bold-label-15"/>
-                                          <DatePicker fx:id="Date" prefHeight="26.0" prefWidth="200.0"
-                                                      promptText="ENTER DATE" />
+                                          <Label text="Finish Date">
+                                             <font>
+                                                <Font name="Consolas Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <DatePicker fx:id="datePicker" prefHeight="26.0" prefWidth="200.0" promptText="ENTER DATE" />
                                        </children>
                                     </FlowPane>
                                  </bottom>
                                  <center>
-                                    <FlowPane alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="230.0"
-                                              BorderPane.alignment="CENTER">
+                                    <FlowPane alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="230.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <CheckBox fx:id="checkPlayed" mnemonicParsing="false" text="PLAYED"
-                                                    styleClass="played-checkbox"/>
+                                          <CheckBox fx:id="checkPlayed" mnemonicParsing="false" text="PLAYED" textFill="#ff0073">
+                                             <font>
+                                                <Font name="Consolas Bold" size="22.0" />
+                                             </font>
+                                          </CheckBox>
                                        </children>
                                     </FlowPane>
                                  </center>
                               </BorderPane>
-                           </center>
-                        </BorderPane>
+                           </center></BorderPane>
                      </center>
                   </BorderPane>
                </top>
                <bottom>
                   <BorderPane prefHeight="66.4" prefWidth="646.0" BorderPane.alignment="CENTER">
                      <right>
-                        <FlowPane alignment="TOP_RIGHT" orientation="VERTICAL" prefHeight="66.0"
-                                  prefWidth="215.2" BorderPane.alignment="CENTER">
+                        <FlowPane alignment="TOP_RIGHT" orientation="VERTICAL" prefHeight="66.0" prefWidth="215.2" BorderPane.alignment="CENTER">
                            <children>
-                              <Label alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="176.0" text="MY RATING"
-                                     styleClass="my-rating-label"/>
+                              <Label alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="176.0" text="MY RATING" textFill="#e2ff00">
+                                 <font>
+                                    <Font name="Consolas Bold" size="22.0" />
+                                 </font>
+                              </Label>
                               <Rating fx:id="rating" />
                            </children>
                         </FlowPane>
                      </right>
                      <left>
-                        <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="215.2"
-                                  BorderPane.alignment="CENTER">
+                        <FlowPane orientation="VERTICAL" prefHeight="200.0" prefWidth="215.2" BorderPane.alignment="CENTER">
                            <children>
-                              <Label text="Genre" styleClass="bold-label-15"/>
-                              <CheckComboBox fx:id="comboGenre" prefHeight="26.0" prefWidth="113.0"
-                                             title="Genres" />
+                              <Label text="Genre">
+                                 <font>
+                                    <Font name="Consolas Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <CheckComboBox fx:id="comboGenre" prefHeight="26.0" prefWidth="113.0" title="Genres" />
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <FlowPane alignment="CENTER" hgap="22.0" prefHeight="200.0" prefWidth="200.0"
-                                  BorderPane.alignment="CENTER">
+                        <FlowPane alignment="CENTER" hgap="22.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="btnSave" prefHeight="45.0" prefWidth="45.0" styleClass="save-icon"/>
-                              <Label fx:id="btnCancel" prefHeight="45.0" prefWidth="45.0" styleClass="cancel-icon"/>
+                              <Label fx:id="btnSave" onMouseClicked="#updateChanges" prefHeight="45.0" prefWidth="45.0" style="-fx-background-image: url('Images/IconSave.png'); -fx-background-size: cover; -fx-background-position: center;" />
+                              <Label fx:id="btnCancel" onMouseClicked="#goBack" prefHeight="45.0" prefWidth="45.0" style="-fx-background-image: url('Images/IconCancel.png'); -fx-background-size: cover; -fx-background-position: center;" />
                            </children>
                         </FlowPane>
                      </center>
                   </BorderPane>
                </bottom>
             </BorderPane>
-         </center>
-      </BorderPane>
+         </center></BorderPane>
    </center>
 </BorderPane>

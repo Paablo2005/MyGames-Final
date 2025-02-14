@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,9 +25,9 @@ import jakarta.persistence.TemporalType;
 public class Game {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "gameId", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int gameId;
 
     @Column(name = "name", nullable = false, length = 45)
     private String name;
@@ -35,16 +36,28 @@ public class Game {
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
     
-    @Column(name = "image", nullable = false, length = 100)
-    private String image;
+    @Column(name = "description", nullable = false, length = 255)
+    private String description;
     
     @Column(name = "apiId", nullable = false)
     private int apiId;
     
+    @Column(name = "image", nullable = true, length = 255)
+    private String image;
+    
+    @Column(name = "image1", nullable = true, length = 255)
+    private String image1;
+
+    @Column(name = "image2", nullable = true, length = 255)
+    private String image2;
+    
+    @Column(name = "image3", nullable = true, length = 255)
+    private String image3;
+    
     @ManyToMany
     @JoinTable(
         name = "Game_Genres",
-        joinColumns = @JoinColumn(name = "id"),
+        joinColumns = @JoinColumn(name = "gameId"),
         inverseJoinColumns = @JoinColumn(name = "genrePK")
     )
     private Set<Genre> genres;
@@ -52,38 +65,30 @@ public class Game {
     @ManyToMany
     @JoinTable(
         name = "Game_Platforms",
-        joinColumns = @JoinColumn(name = "id"),
+        joinColumns = @JoinColumn(name = "gameId"),
         inverseJoinColumns = @JoinColumn(name = "platformPK")
     )
     private Set<Platforms> platforms;
 
-    @ManyToMany
-    @JoinTable(
-        name = "Game_Developers",
-        joinColumns = @JoinColumn(name = "id"),
-        inverseJoinColumns = @JoinColumn(name = "developerPK")
-    )
-    private Set<Developer> developers;
+    @Column(name = "developers", nullable = false)
+    private String developers;
 
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Images> screenshots;
     
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Collection> collections = new HashSet<>();
 
     public Game() {
+    	this.developers = "";
     	this.genres = new HashSet<>();
     	this.platforms = new HashSet<>();
-    	this.developers = new HashSet<>();
-    	this.screenshots = new HashSet<>();
     }
 
 	public int getId() {
-		return id;
+		return gameId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.gameId = id;
 	}
 
 	public String getName() {
@@ -126,20 +131,44 @@ public class Game {
 		this.platforms = platforms;
 	}
 
-	public Set<Developer> getDevelopers() {
+	public String getDevelopers() {
 		return developers;
 	}
 
-	public void setDevelopers(Set<Developer> developers) {
+	public void setDevelopers(String developers) {
 		this.developers = developers;
 	}
-
-	public Set<Images> getScreenshots() {
-		return screenshots;
+	
+	public String getImage1() {
+		return image1;
 	}
 
-	public void setScreenshots(Set<Images> screenshots) {
-		this.screenshots = screenshots;
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+
+	public String getImage2() {
+		return image2;
+	}
+
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
+
+	public String getImage3() {
+		return image3;
+	}
+
+	public void setImage3(String image3) {
+		this.image3 = image3;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Date getReleaseDate() {
@@ -149,12 +178,28 @@ public class Game {
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}
+	
+	public ArrayList<String> platformsToString() {
+		ArrayList<String> result = new ArrayList<String>();
+		for (Platforms pl : platforms)
+			result.add(pl.getName());
+		return result;
+	}
+	
+	public ArrayList<String> genresToString() {
+		ArrayList<String> result = new ArrayList<String>();
+		for (Genre gen : genres)
+			result.add(gen.getName());
+		return result;
+	}
 
 	@Override
 	public String toString() {
-		return "Game [id=" + id + ", name=" + name + ", releaseDate=" + releaseDate + ", image="
-				+ image + ", apiId=" + apiId + ", genres=" + genres + ", platforms="
-				+ platforms + ", developers=" + developers + ", screenshots=" + screenshots + "]";
+		return "Game [gameId=" + gameId + ", name=" + name + ", releaseDate=" + releaseDate + ", description="
+				+ description + ", image=" + image + ", apiId=" + apiId + ", image1=" + image1 + ", image2=" + image2
+				+ ", image3=" + image3 + ", genres=" + genres + ", platforms=" + platforms + ", developers="
+				+ developers + ", collections=" + collections + "]";
 	}
-
+	
+	
 }

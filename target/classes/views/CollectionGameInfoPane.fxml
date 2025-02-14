@@ -5,40 +5,29 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
-            prefHeight="629.6" prefWidth="709.6" 
-            xmlns="http://javafx.com/javafx/23.0.1" 
-            xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="controllers.CollectionGameInfoPaneController"
-            stylesheets="/styles/CollectionGameInfoPaneStyles.css"
-            styleClass="collection-game-info-pane">
-   <!-- Espacio superior -->
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.6" prefWidth="709.6" style="-fx-background-image: url('Images/GradientBackground.png'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CollectionGameInfoPaneController">
    <top>
-      <FlowPane prefHeight="20.0" prefWidth="710.0" BorderPane.alignment="CENTER" styleClass="top-space" />
+      <FlowPane prefHeight="20.0" prefWidth="710.0" BorderPane.alignment="CENTER" />
    </top>
-   <!-- Espacios laterales -->
    <left>
-      <FlowPane prefHeight="459.0" prefWidth="20.0" BorderPane.alignment="CENTER" styleClass="side-space" />
+      <FlowPane prefHeight="459.0" prefWidth="20.0" BorderPane.alignment="CENTER" />
    </left>
-   <right>
-      <FlowPane prefHeight="459.0" prefWidth="20.0" BorderPane.alignment="CENTER" styleClass="side-space" />
-   </right>
-   <!-- Contenedor inferior con imágenes -->
    <bottom>
-      <FlowPane alignment="CENTER" hgap="23.0" prefHeight="175.0" prefWidth="710.0" 
-                BorderPane.alignment="CENTER" styleClass="images-flowpane">
+      <FlowPane alignment="CENTER" hgap="23.0" prefHeight="175.0" prefWidth="710.0" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane fx:id="paneImage1" prefHeight="146.4" prefWidth="205.6" styleClass="image-pane" />
-            <BorderPane fx:id="paneImage2" prefHeight="146.4" prefWidth="205.6" styleClass="image-pane" />
-            <BorderPane fx:id="paneImage3" prefHeight="146.4" prefWidth="205.6" styleClass="image-pane" />
-         </children>
-      </FlowPane>
+            <BorderPane fx:id="paneImage1" prefHeight="146.4" prefWidth="205.6" style="-fx-background-color: red;" />
+            <BorderPane fx:id="paneImage2" prefHeight="146.4" prefWidth="205.6" style="-fx-background-color: red;" />
+            <BorderPane fx:id="paneImage3" prefHeight="146.4" prefWidth="205.6" style="-fx-background-color: red;" />
+         </children></FlowPane>
    </bottom>
-   <!-- Contenedor central con información -->
+   <right>
+      <FlowPane prefHeight="459.0" prefWidth="20.0" BorderPane.alignment="CENTER" />
+   </right>
    <center>
-      <BorderPane prefHeight="459.0" prefWidth="378.0" BorderPane.alignment="CENTER" styleClass="center-pane">
+      <BorderPane prefHeight="459.0" prefWidth="378.0" style="-fx-background-color: rgba(255, 255, 255, 0.6);" BorderPane.alignment="CENTER">
          <left>
             <Pane prefHeight="200.0" prefWidth="12.0" BorderPane.alignment="CENTER" />
          </left>
@@ -53,56 +42,77 @@
          </bottom>
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <!-- Contenedor del comentario -->
                <center>
-                  <FlowPane orientation="VERTICAL" prefHeight="146.0" prefWidth="646.0" 
-                            BorderPane.alignment="CENTER" styleClass="commentary-container">
+                  <FlowPane orientation="VERTICAL" prefHeight="146.0" prefWidth="646.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label text="Commentary" styleClass="commentary-title" />
-                        <Label fx:id="lblCommentary" alignment="TOP_LEFT" prefHeight="100.0" 
-                               prefWidth="562.0" text="Commentary" wrapText="true" styleClass="commentary-text" />
+                        <Label text="Commentary">
+                           <font>
+                              <Font name="Consolas Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblCommentary" alignment="TOP_LEFT" prefHeight="100.0" prefWidth="562.0" text="Commentary" wrapText="true">
+                           <font>
+                              <Font name="Consolas" size="15.0" />
+                           </font>
+                        </Label>
                      </children>
                   </FlowPane>
                </center>
-               <!-- Sección superior de información -->
                <top>
-                  <BorderPane prefHeight="225.0" prefWidth="646.0" BorderPane.alignment="CENTER" styleClass="info-section">
+                  <BorderPane prefHeight="225.0" prefWidth="646.0" BorderPane.alignment="CENTER">
                      <left>
-                        <BorderPane prefHeight="226.0" prefWidth="380.0" BorderPane.alignment="CENTER" styleClass="info-left">
+                        <BorderPane prefHeight="226.0" prefWidth="380.0" BorderPane.alignment="CENTER">
                            <bottom>
-                              <FlowPane orientation="VERTICAL" prefHeight="52.8" prefWidth="380.0" 
-                                        BorderPane.alignment="CENTER" styleClass="platform-container">
+                              <FlowPane orientation="VERTICAL" prefHeight="52.8" prefWidth="380.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Label text="Platform" styleClass="info-title" />
-                                    <Label fx:id="lblPlatform" alignment="TOP_LEFT" prefHeight="34.0" 
-                                           prefWidth="380.0" text="Platform" styleClass="info-text" />
-                                 </children>
-                              </FlowPane>
+                                    <Label text="Platform">
+                                       <font>
+                                          <Font name="Consolas Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblPlatform" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="380.0" text="Platform">
+                                       <font>
+                                          <Font name="Consolas" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children></FlowPane>
                            </bottom>
                            <center>
-                              <FlowPane orientation="VERTICAL" prefHeight="58.0" prefWidth="380.0" 
-                                        BorderPane.alignment="CENTER" styleClass="studio-container">
+                              <FlowPane orientation="VERTICAL" prefHeight="58.0" prefWidth="380.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Label text="Developer / Studio" styleClass="info-title" />
-                                    <Label fx:id="lblStudio" alignment="TOP_LEFT" prefHeight="34.0" 
-                                           prefWidth="380.0" text="Studio" styleClass="info-text" />
-                                 </children>
-                              </FlowPane>
+                                    <Label text="Developer / Studio">
+                                       <font>
+                                          <Font name="Consolas Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblStudio" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="380.0" text="Studio">
+                                       <font>
+                                          <Font name="Consolas" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children></FlowPane>
                            </center>
                            <top>
-                              <BorderPane prefHeight="120.0" prefWidth="380.0" BorderPane.alignment="CENTER" styleClass="title-description-section">
+                              <BorderPane prefHeight="120.0" prefWidth="380.0" BorderPane.alignment="CENTER">
                                  <top>
-                                    <FlowPane prefHeight="28.0" prefWidth="380.0" BorderPane.alignment="CENTER" styleClass="section-title">
+                                    <FlowPane prefHeight="28.0" prefWidth="380.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label fx:id="lblTitle" text="TITLE" styleClass="section-title-text" />
+                                          <Label fx:id="lblTitle" text="TITLE" textFill="BLUE">
+                                             <font>
+                                                <Font name="Consolas Bold" size="18.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </FlowPane>
                                  </top>
                                  <center>
-                                    <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" styleClass="description-container">
+                                    <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label fx:id="lblDescription" alignment="TOP_LEFT" prefHeight="92.0" 
-                                                 prefWidth="380.0" text="Description" wrapText="true" styleClass="description-text" />
+                                          <Label fx:id="lblDescription" alignment="TOP_LEFT" prefHeight="92.0" prefWidth="380.0" text="Description" wrapText="true">
+                                             <font>
+                                                <Font name="Consolas" size="15.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </FlowPane>
                                  </center>
@@ -111,71 +121,92 @@
                         </BorderPane>
                      </left>
                      <center>
-                        <BorderPane prefHeight="226.0" prefWidth="397.0" BorderPane.alignment="CENTER" styleClass="info-right">
+                        <BorderPane prefHeight="226.0" prefWidth="397.0" BorderPane.alignment="CENTER">
                            <left>
                               <Pane prefHeight="226.0" prefWidth="35.0" BorderPane.alignment="CENTER" />
                            </left>
                            <center>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" styleClass="image-rating-section">
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <top>
-                                    <FlowPane alignment="CENTER" prefHeight="140.0" prefWidth="230.0" BorderPane.alignment="CENTER" styleClass="game-image-container">
+                                    <FlowPane alignment="CENTER" prefHeight="140.0" prefWidth="230.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <BorderPane fx:id="paneImage" prefHeight="140.0" prefWidth="230.4" styleClass="game-image" />
+                                          <BorderPane fx:id="paneImage" prefHeight="140.0" prefWidth="230.4" style="-fx-background-color: red;" />
                                        </children>
                                     </FlowPane>
                                  </top>
                                  <bottom>
-                                    <FlowPane alignment="CENTER_RIGHT" prefHeight="42.2" prefWidth="230.0" BorderPane.alignment="CENTER" styleClass="finish-date-container">
+                                    <FlowPane alignment="CENTER_RIGHT" prefHeight="42.2" prefWidth="230.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label text="Finish Date" styleClass="finish-date-title" />
-                                          <Label fx:id="lblFinishDates" alignment="CENTER_RIGHT" prefHeight="18.0" 
-                                                 prefWidth="230.0" text="Finish Date" styleClass="finish-date-text" />
+                                          <Label text="Finish Date">
+                                             <font>
+                                                <Font name="Consolas Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lblFinishDates" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="230.0" text="Finish Date">
+                                             <font>
+                                                <Font name="Consolas" size="15.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </FlowPane>
                                  </bottom>
                                  <center>
-                                    <FlowPane alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="230.0" BorderPane.alignment="CENTER" styleClass="played-checkbox-container">
+                                    <FlowPane alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="230.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <CheckBox mnemonicParsing="false" text="PLAYED" styleClass="played-checkbox" />
+                                          <CheckBox fx:id="isPlayed" mnemonicParsing="false" text="PLAYED" textFill="#ff0073">
+                                             <font>
+                                                <Font name="Consolas Bold" size="22.0" />
+                                             </font>
+                                          </CheckBox>
                                        </children>
                                     </FlowPane>
                                  </center>
                               </BorderPane>
-                           </center>
-                        </BorderPane>
+                           </center></BorderPane>
                      </center>
                   </BorderPane>
                </top>
-               <!-- Sección inferior con rating, género y botón de edición -->
                <bottom>
-                  <BorderPane prefHeight="66.4" prefWidth="646.0" BorderPane.alignment="CENTER" styleClass="bottom-section">
+                  <BorderPane prefHeight="66.4" prefWidth="646.0" BorderPane.alignment="CENTER">
                      <right>
-                        <FlowPane alignment="TOP_RIGHT" orientation="VERTICAL" prefHeight="66.0" prefWidth="215.2" BorderPane.alignment="CENTER" styleClass="rating-container">
+                        <FlowPane alignment="TOP_RIGHT" orientation="VERTICAL" prefHeight="66.0" prefWidth="215.2" BorderPane.alignment="CENTER">
                            <children>
-                              <Label alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="176.0" text="MY RATING" styleClass="rating-title" />
-                              <Rating fx:id="rating" styleClass="rating-control" />
+                              <Label alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="176.0" text="MY RATING" textFill="#e2ff00">
+                                 <font>
+                                    <Font name="Consolas Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Rating fx:id="rating" />
                            </children>
                         </FlowPane>
                      </right>
                      <left>
-                        <FlowPane orientation="VERTICAL" prefHeight="66.0" prefWidth="187.0" BorderPane.alignment="CENTER" styleClass="genre-container">
+                        <FlowPane orientation="VERTICAL" prefHeight="66.0" prefWidth="187.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label text="Genre" styleClass="info-title" />
-                              <Label fx:id="lblGenre" alignment="TOP_LEFT" prefHeight="48.0" prefWidth="187.2" text="Genres" wrapText="true" styleClass="info-text" />
+                              <Label text="Genre">
+                                 <font>
+                                    <Font name="Consolas Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblGenre" alignment="TOP_LEFT" prefHeight="48.0" prefWidth="187.2" text="Genres" wrapText="true">
+                                 <font>
+                                    <Font name="Consolas" size="15.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </FlowPane>
                      </left>
                      <center>
-                        <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" styleClass="edit-button-container">
+                        <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="btnEdit" prefHeight="45.0" prefWidth="45.0" styleClass="edit-button" />
+                              <Label fx:id="btnBack" onMouseClicked="#backToCollection" prefHeight="45.0" prefWidth="45.0" style="-fx-background-image: url('Images/back.png'); -fx-background-size: cover; -fx-background-position: center;" />
+                              <Label fx:id="btnEdit" onMouseClicked="#goToEditMode" prefHeight="45.0" prefWidth="45.0" style="-fx-background-image: url('Images/Editpng.png'); -fx-background-size: cover; -fx-background-position: center;" />
                            </children>
                         </FlowPane>
                      </center>
                   </BorderPane>
                </bottom>
             </BorderPane>
-         </center>
-      </BorderPane>
+         </center></BorderPane>
    </center>
 </BorderPane>

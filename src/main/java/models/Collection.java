@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Date;
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -44,7 +44,7 @@ public class Collection {
 		this.review = "";
 		this.stars = 0;
 		this.played = false;
-		this.finishDate = new Date();
+		this.finishDate = new Date(System.currentTimeMillis());
     }
     
 	public Collection(int userId, int gameId, String review, Byte score, Boolean played) {
@@ -52,7 +52,7 @@ public class Collection {
 		this.review = review;
 		this.stars = score;
 		this.played = played;
-		this.finishDate = new Date();
+		this.finishDate = new Date(System.currentTimeMillis());
 	}
 	
 	public Collection(int userId, int gameId) {
@@ -90,6 +90,22 @@ public class Collection {
 
 	public void setPlayed(Boolean played) {
 		this.played = played;
+	}
+
+	public int getStars() {
+		return stars;
+	}
+
+	public void setStars(int stars) {
+		this.stars = stars;
+	}
+
+	public Date getFinishDate() {
+		return finishDate;
+	}
+
+	public void setFinishDate(Date finishDate) {
+		this.finishDate = finishDate;
 	}
 
 	@Override

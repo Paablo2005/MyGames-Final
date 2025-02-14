@@ -14,4 +14,8 @@ public interface GameDaoInt {
 	 * @throws SQLException
 	 */
 	public List<Game> getGamesByUserCollection(int userId) throws SQLException;
+	
+	public Game getByDatabaseId(int gameId) throws SQLException;
+	
+	public Game getByApiId(int apiId) throws SQLException;
 }

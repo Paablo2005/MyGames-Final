@@ -5,7 +5,7 @@
             jdbc:mysql://localhost:3306/projectmygames?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC
         </property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">2005</property>
+        <property name="hibernate.connection.password">admin</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
@@ -19,8 +19,6 @@
         <mapping class="models.Game"/>
         <mapping class="models.Collection"/>
         <mapping class="models.Platforms"/>
-        <mapping class="models.Developer"/>
-        <mapping class="models.Images"/>
         <mapping class="models.Genre"/>
     </session-factory>
 </hibernate-configuration>
