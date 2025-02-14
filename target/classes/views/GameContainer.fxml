@@ -14,6 +14,6 @@
       </FlowPane>
    </bottom>
    <center>
-      <Pane fx:id="paneImg" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="paneImg" onMouseClicked="#handleDetails" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

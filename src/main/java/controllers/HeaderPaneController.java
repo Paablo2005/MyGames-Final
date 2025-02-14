@@ -56,6 +56,8 @@ public class HeaderPaneController {
     @FXML
     private Button btnFilter;
     
+    private boolean isGamesCurrentScreen;
+    
     /**
      * Inicializa el controlador.
      * <p>
@@ -67,7 +69,7 @@ public class HeaderPaneController {
     public void initialize() {
         btnSearch.setOnAction(event -> handleSearch());
         
-        btnDeleteFilters.setOnAction(event -> clearFilters());
+        btnDeleteFilters.setOnAction(event -> handleClear());
         
         btnFilter.setOnAction(event -> handleFilter());
         
@@ -91,20 +93,44 @@ public class HeaderPaneController {
             "Neo Geo", "Web"
         );
     }
+    
+    public boolean isGamesCurrentScreen() {
+		return isGamesCurrentScreen;
+	}
 
-    /**
+	public void setGamesCurrentScreen(boolean isGamesCurrentScreen) {
+		this.isGamesCurrentScreen = isGamesCurrentScreen;
+	}
+
+    private void handleSearch() {
+        if (isGamesCurrentScreen) {
+        	apiSearch();
+        } else {
+        	CollectionPaneController.getInstance().filterGames(txtSearch.getText(), comboGenre.getCheckModel().getCheckedItems(), comboPlatform.getCheckModel().getCheckedItems());
+        }
+    }
+	
+	/**
      * Maneja la acción de búsqueda.
      * <p>
      * Obtiene el texto ingresado en el campo de búsqueda. Si la consulta está vacía, recarga la página
      * actual de juegos; de lo contrario, inicia una búsqueda mediante el {@link GamesPaneController}.
      * </p>
      */
-    private void handleSearch() {
+    private void apiSearch() {
         String query = txtSearch.getText().trim();
         if (query.isEmpty()) {
             GamesPaneController.getInstance().loadPage(GamesPaneController.getInstance().getCurrentPage());
         } else {
             GamesPaneController.getInstance().searchGames(query);
+        }
+    }
+    
+    private void handleClear() {
+        if (isGamesCurrentScreen) {
+        	clearFilters();
+        } else {
+        	clearDatabaseFilters();
         }
     }
     
@@ -120,7 +146,21 @@ public class HeaderPaneController {
         comboPlatform.getCheckModel().clearChecks();
         GamesPaneController.getInstance().clearSearchAndFilters();
     }
+    
+    private void clearDatabaseFilters() {
+        comboGenre.getCheckModel().clearChecks();
+        comboPlatform.getCheckModel().clearChecks();
+        CollectionPaneController.getInstance().clearSearchAndFilters();
+    }
 
+    private void handleFilter() {
+        if (isGamesCurrentScreen) {
+        	setApiFilters();
+        } else {
+        	CollectionPaneController.getInstance().filterGames(txtSearch.getText(), comboGenre.getCheckModel().getCheckedItems(), comboPlatform.getCheckModel().getCheckedItems());
+        }
+    }
+    
     /**
      * Maneja la acción de filtrado.
      * <p>
@@ -129,7 +169,7 @@ public class HeaderPaneController {
      * llamando al método {@code filterGames} del {@link GamesPaneController}.
      * </p>
      */
-    private void handleFilter() {
+    private void setApiFilters() {
         List<String> selectedGenres = comboGenre.getCheckModel().getCheckedItems();
         List<String> selectedPlatforms = comboPlatform.getCheckModel().getCheckedItems();
 
@@ -150,5 +190,5 @@ public class HeaderPaneController {
         String platformsParam = String.join(",", platformsIds);
 
         GamesPaneController.getInstance().filterGames(genresParam, platformsParam);
-    }  
+    }
 }

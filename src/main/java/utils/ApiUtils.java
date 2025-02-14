@@ -57,13 +57,13 @@ public class ApiUtils {
             for (int i = 0; i < results.length(); i++) {
                 JSONObject gameObj = results.getJSONObject(i);
                 String name = gameObj.getString("name");
+                int apiId = gameObj.getInt("id");
                 String imageUrl = gameObj.optString("background_image", "");
-                
-                System.out.println("Game " + (i + 1) + " - Name: " + name + ", Image URL: " + imageUrl);
                 
                 Game game = new Game();
                 game.setName(name);
                 game.setPrincipalImg(imageUrl);
+                game.setApiId(apiId);
                 games.add(game);
             }
         }

@@ -1,116 +1,198 @@
 package controllers;
 
-import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import org.controlsfx.control.CheckComboBox;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.FileChooser;
+import models.Collection;
+import models.Game;
+import utils.HibernateUtil;
+import utils.PasswordUtil;
 
-public class CollectionGameInfoPaneController implements Initializable {
+import java.io.File;
+
+import org.controlsfx.control.Rating;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+
+import dao.CollectionDaoImpl;
+import dao.GameDaoImpl;
+
+public class CollectionGameInfoPaneController {
+	
+    /**
+     * Instancia única (singleton) de {@link CollectionGameInfoPaneController}.
+     */
+    private static CollectionGameInfoPaneController instance;
+    
+    /**
+     * Obtiene la instancia actual de {@link CollectionGameInfoPaneController}.
+     *
+     * @return la instancia actual del controlador
+     */
+    public static CollectionGameInfoPaneController getInstance() {
+        return instance;
+    }
+    
+    private String placeholderImg = "https://mrchava.es/wp-content/uploads/2021/09/placeholder.png";
+
+    @FXML
+    private Label btnEdit;
+    
+    @FXML
+    private Label btnBack;
+
+    @FXML
+    private Label lblCommentary;
+
+    @FXML
+    private Label lblDescription;
+
+    @FXML
+    private Label lblFinishDates;
+
+    @FXML
+    private Label lblGenre;
+
+    @FXML
+    private Label lblPlatform;
+
+    @FXML
+    private Label lblStudio;
+
+    @FXML
+    private Label lblTitle;
 
     @FXML
     private BorderPane paneImage;
-    @FXML
-    private Button btnUploadImage;
-    
+
     @FXML
     private BorderPane paneImage1;
-    @FXML
-    private Button btnUploadImage1;
-    
+
     @FXML
     private BorderPane paneImage2;
-    @FXML
-    private Button btnUploadImage2;
-    
+
     @FXML
     private BorderPane paneImage3;
+
     @FXML
-    private Button btnUploadImage3;
+    private CheckBox isPlayed;
     
-    /**
-     * Combo box que permite seleccionar múltiples géneros para filtrar.
-     */
     @FXML
-    private CheckComboBox<String> comboGenre;
+    private Rating rating;
+
+    private Game game;
+    private Collection collection;
+    private Session session;
     
-    /**
-     * Combo box que permite seleccionar múltiples plataformas para filtrar.
-     */
+    private String image0;
+    private String image1;
+    private String image2;
+    private String image3;
+    
     @FXML
-    private CheckComboBox<String> comboPlatform;
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // Añadir elementos al combo de géneros
-        comboGenre.getItems().addAll(
-            "Action", "Indie", "Adventure", "RPG", "Strategy", "Shooter", "Casual", 
-            "Simulation", "Puzzle", "Arcade", "Platformer", "Massively Multiplayer", 
-            "Racing", "Sports", "Fighting", "Family", "Board Games", "Educational", "Card"
-        );
+	public void initialize() {
+    	instance = this;
         
-        // Añadir elementos al combo de plataformas
-        comboPlatform.getItems().addAll(
-            "PC", "PlayStation 5", "Xbox One", "PlayStation 4", "Xbox Series S/X", 
-            "Nintendo Switch", "iOS", "Android", "Nintendo 3DS", "Nintendo DS", "Nintendo DSi", 
-            "macOS", "Linux", "Xbox 360", "Xbox", "PlayStation 3", "PlayStation 2", 
-            "PlayStation", "PS Vita", "PSP", "Wii U", "Wii", "GameCube", "Nintendo 64", 
-            "Game Boy Advance", "Game Boy Color", "Game Boy", "SNES", "NES", "Classic Macintosh", 
-            "Apple II", "Commodore / Amiga", "Atari 7800", "Atari 5200", "Atari 2600", "Atari Flashback", 
-            "Atari 8-bit", "Atari ST", "Atari Lynx", "Atari XEGS", "Genesis", "SEGA Saturn", 
-            "SEGA CD", "SEGA 32X", "SEGA Master System", "Dreamcast", "3DO", "Jaguar", "Game Gear", 
-            "Neo Geo", "Web"
-        );
-        setupImageUploader(paneImage, btnUploadImage);
-        setupImageUploader(paneImage1, btnUploadImage1);
-        setupImageUploader(paneImage2, btnUploadImage2);
-        setupImageUploader(paneImage3, btnUploadImage3);
+    	rating.setMouseTransparent(true);
+    	isPlayed.setMouseTransparent(true);
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(int gameId) {
+		try {
+			GameDaoImpl dao = new GameDaoImpl(session);
+			
+			this.game = dao.getByDatabaseId(gameId);
+			
+	        Hibernate.initialize(this.game.getPlatforms());
+	        Hibernate.initialize(this.game.getGenres());
+	        
+	        updateGameDetails();
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.game = null;
+		}
+	}
+	
+	public Session getSession() {
+		
+    	if (session != null || session.isOpen() || session.isConnected()) {
+    	    session = HibernateUtil.getSessionFactory().openSession();
+    	}
+		return session;
+	}
+	
+	public Session setSession() {
+		// Si tengo una sesión válida
+    	if (session != null) {
+    		if (session.isOpen() || session.isConnected()) {
+    			return session;
+    		} else {
+        	    session = HibernateUtil.getSessionFactory().openSession();
+        	    return session;
+    		}
+    	} else {
+    	    session = HibernateUtil.getSessionFactory().openSession();
+    	    return session;
+    	}
+	}
+	
+	public void updateGameDetails() {
+		CollectionDaoImpl colDao = new CollectionDaoImpl(session);
+		collection = colDao.getByCompositeKey(PasswordUtil.getLoggedUser().getId(), game.getId());
+
+		lblTitle.setText(game.getName());
+		lblStudio.setText(game.getDevelopers());
+		lblDescription.setText(game.getDescription());
+		
+		lblPlatform.setText(String.join(", ", game.platformsToString()));
+		lblGenre.setText(String.join(", ", game.genresToString()));
+		
+		loadGameImage(paneImage, (game.getPrincipalImg() == null || game.getPrincipalImg().isEmpty()) ? placeholderImg : game.getPrincipalImg(), image0);
+		loadGameImage(paneImage1, (game.getImage1() == null || game.getImage1().isEmpty()) ? placeholderImg : game.getImage1(), image1);
+		loadGameImage(paneImage2, (game.getImage2() == null || game.getImage2().isEmpty()) ? placeholderImg : game.getImage2(), image2);
+		loadGameImage(paneImage3, (game.getImage3() == null || game.getImage3().isEmpty()) ? placeholderImg : game.getImage3(), image3);
+		
+		lblCommentary.setText(collection.getReview());
+		lblFinishDates.setText(collection.getFinishDate().toString());
+		rating.setRating(collection.getScore());
+		isPlayed.setSelected(collection.getPlayed());
+	}
+
+	public void loadGameImage(BorderPane pane, String url, String imgX) {
+		// File para comprobar el origen del URL
+		File file = new File(url);
+		
+		if (file.exists() || file.isFile()) {
+			pane.setStyle("-fx-background-image: url('"+file.toURI().toString()+"'); "
+					+ "-fx-background-size: cover; "
+					+ "-fx-background-position: center;");
+			imgX = url;
+		} else if (game.getApiId() > 0 || url.equals(placeholderImg)) {
+			pane.setStyle("-fx-background-image: url('"+url+"'); "
+					+ "-fx-background-size: cover; "
+					+ "-fx-background-position: center;");
+			imgX = url; 
+		} else {
+			pane.setStyle("-fx-background-image: url('"+file.toURI().toString()+"'); "
+					+ "-fx-background-size: cover; "
+					+ "-fx-background-position: center;");
+			imgX = new File(url).toURI().toString();
+		}
+	}
+	
+    @FXML
+    void backToCollection(MouseEvent event) {
+    	MainPaneController.getInstance().reloadCollectionPane();
     }
-    
-    /**
-     * Configura el botón para abrir un FileChooser que solo permita seleccionar imágenes,
-     * y establece la imagen seleccionada como fondo del pane indicado.
-     *
-     * @param pane   El contenedor en el que se establecerá la imagen de fondo.
-     * @param button El botón que, al pulsarlo, abre el FileChooser.
-     */
-    private void setupImageUploader(BorderPane pane, Button button) {
-        button.setOnAction(e -> {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Seleccionar Imagen");
-            // Filtro para seleccionar únicamente imágenes
-            FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
-                "Imágenes", "*.png", "*.jpg", "*.jpeg", "*.gif");
-            fileChooser.getExtensionFilters().add(imageFilter);
-            
-            // Se obtiene la ventana actual desde el botón
-            File file = fileChooser.showOpenDialog(button.getScene().getWindow());
-            if (file != null) {
-                // Se carga la imagen
-                Image image = new Image(file.toURI().toString());
-                // Se crea el BackgroundImage con las propiedades deseadas
-                BackgroundImage bgImage = new BackgroundImage(
-                    image,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.CENTER,
-                    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
-                );
-                // Se establece el fondo en el pane
-                pane.setBackground(new Background(bgImage));
-            }
-        });
+
+    @FXML
+    void goToEditMode(MouseEvent event) {
+    	MainPaneController.getInstance().editDatabaseGame();
     }
 }

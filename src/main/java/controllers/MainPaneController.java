@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,15 +15,30 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import models.User;
+import utils.PasswordUtil;
 
 public class MainPaneController {
-
-    // Variable para almacenar el usuario autenticado
-    private User currentUser;
+	
+    /**
+     * Instancia única (singleton) de {@link MainPaneController}.
+     */
+    private static MainPaneController instance;
     
+    /**
+     * Obtiene la instancia actual de {@link MainPaneController}.
+     *
+     * @return la instancia actual del controlador
+     */
+    public static MainPaneController getInstance() {
+        return instance;
+    }
+
     @FXML
     private FlowPane btnHome;
 
@@ -67,17 +83,26 @@ public class MainPaneController {
     
     @FXML
     private BorderPane paneGames;
+    
+    private BorderPane headerPane;
+    private HeaderPaneController headerPaneController;
+    
+    private BorderPane collectionGameInfoPane;
+    private CollectionGameInfoPaneController collectionGameInfoController;
+    
+    private BorderPane collectionGameInfoEditPane;
+    private CollectionGameInfoEditPaneController collectionGameInfoEditPaneController;
 
     @FXML
     public void initialize() {
-    	loadHomePane();
+    	instance = this;
     	containerImgProfile.layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
             double radius = Math.min(newBounds.getWidth(), newBounds.getHeight()) / 2;
             Circle clip = new Circle(newBounds.getWidth() / 2, newBounds.getHeight() / 2, radius);
             containerImgProfile.setClip(clip);
         });
         
-        setupHoverEffect(btnHome);
+       setupHoverEffect(btnHome);
         setupHoverEffect(btnCollection);
         setupHoverEffect(btnGames);
         setupHoverEffect(ContainerLogOut);
@@ -87,13 +112,20 @@ public class MainPaneController {
 
         ContainerLogOut.setOnMouseClicked(event -> logOutAndGoToLogin());
 
+        headerPane = loadHeaderPane();
+        
+        preloadGameInfoDatabasePane();
+    	collectionGameInfoController.setSession();
+    	collectionGameInfoEditPaneController.setSession(collectionGameInfoController.getSession());
+    	
+        clearHeaderPane();
         // Configurar los clics en los botones
         btnCollection.setOnMouseClicked(event -> {
-            loadHeaderPane();
+        	headerPaneController.setGamesCurrentScreen(false);
             loadCollectionPane();
         });
         btnGames.setOnMouseClicked(event -> {
-            loadHeaderPane();
+        	headerPaneController.setGamesCurrentScreen(true);
             loadGamesPane();
         });
         btnHome.setOnMouseClicked(event -> loadHomePane());
@@ -101,6 +133,8 @@ public class MainPaneController {
         // Configura los clics en los contenedores para cargar UserDataPane
         containerImgProfile.setOnMouseClicked(event -> loadUserDataPane());
         containerData.setOnMouseClicked(event -> loadUserDataPane());
+        
+        loadHomePane();
     }
 
     private void setupHoverEffect(FlowPane button) {
@@ -115,17 +149,16 @@ public class MainPaneController {
     }
 
     public void setUserData(User user) {
-        this.currentUser = user;
-        
+    	PasswordUtil.setLoggedUser(user);
         lblUsername.setText(user.getUsername());
         lblMail.setText(user.getEmail());
 
         String profileImageUrl = user.getPicture();
         Image image;
         try {
-            image = new Image(profileImageUrl);
+        	image = new Image(profileImageUrl);        	
         } catch (Exception e) {
-            image = new Image("images/ProfileImage.png");
+        	image = new Image("images/ProfileImage.png");
         }
         profileImageView.setImage(image);
 
@@ -177,7 +210,7 @@ public class MainPaneController {
             UserDataPaneController userDataController = loader.getController();
 
             // Pasar el usuario autenticado usando la variable currentUser
-            userDataController.setUserData(currentUser);
+            userDataController.setUserData(PasswordUtil.getLoggedUser());
             // Pasar la referencia de este controlador principal
             userDataController.setMainController(this);
 
@@ -197,12 +230,14 @@ public class MainPaneController {
     }
 
     @FXML
-    private void loadHeaderPane() {
+    private BorderPane loadHeaderPane() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/HeaderPane.fxml"));
             BorderPane headerPane = loader.load();
 
             paneHeader.setCenter(headerPane);
+            headerPaneController = loader.getController();
+            return headerPane;
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -210,12 +245,21 @@ public class MainPaneController {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
             e.printStackTrace();
+            return null;
         }
     }
 
     @FXML
     private void clearHeaderPane() {
         paneHeader.setCenter(null);
+    }
+    
+    private void setHeaderPane() {
+    	paneHeader.setCenter(headerPane);
+    }
+    
+    public void reloadCollectionPane() {
+    	loadCollectionPane();
     }
     
     @FXML
@@ -225,6 +269,7 @@ public class MainPaneController {
             BorderPane collectionPane = loader.load();
 
             panePrincipal.setCenter(collectionPane);
+            setHeaderPane();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -237,8 +282,8 @@ public class MainPaneController {
             
     private void loadHomePane() {
         try {
-            clearHeaderPane();
-            
+        	clearHeaderPane();
+        	
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/HomePane.fxml"));
             BorderPane homePane = loader.load();
 
@@ -261,7 +306,7 @@ public class MainPaneController {
             BorderPane gamesPane = loader.load();
 
             panePrincipal.setCenter(gamesPane);
-
+            setHeaderPane();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -271,4 +316,42 @@ public class MainPaneController {
             e.printStackTrace();
         }
     }
+    
+    private void preloadGameInfoDatabasePane() {
+    	try {
+    		FXMLLoader infoLoader = new FXMLLoader(getClass().getResource("/views/CollectionGameInfoPane.fxml"));
+
+			collectionGameInfoPane = infoLoader.load();
+			collectionGameInfoController = infoLoader.getController();
+			
+			FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/views/CollectionGameInfoEditPane.fxml"));
+
+			collectionGameInfoEditPane = editLoader.load();
+			collectionGameInfoEditPaneController = editLoader.getController();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    protected void loadGameDetailsFromDatabase(int gameId) {
+    	clearHeaderPane();
+        try {
+        	// Tenemos única conexión a la BBDD antes de cargar los detalles un juego.
+	    	collectionGameInfoController.setGame(gameId);
+	    	collectionGameInfoEditPaneController.setGame(gameId);
+	    	
+	    	panePrincipal.setCenter(collectionGameInfoPane);
+	    } catch (Exception e) {
+	        Alert alert = new Alert(Alert.AlertType.ERROR);
+	        alert.setTitle("Error");
+	        alert.setHeaderText("Error al cargar GamesPane");
+	        alert.setContentText(e.getMessage());
+	        alert.showAndWait();
+	        e.printStackTrace();
+	    }
+    }
+
+	public void editDatabaseGame() {		
+		panePrincipal.setCenter(collectionGameInfoEditPane);
+	}
 }

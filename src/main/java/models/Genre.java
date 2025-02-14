@@ -2,6 +2,9 @@ package models;
 
 import java.util.Set;
 
+import org.hibernate.Session;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -53,5 +56,18 @@ public class Genre {
 
 	public void setGames(Set<Game> games) {
 		this.games = games;
+	}
+	
+	public static Genre getGenreByName(String name, Session session) {
+		if (!session.getTransaction().getStatus().equals(TransactionStatus.ACTIVE)) {
+			session.getTransaction().begin();
+		}
+		try {
+		    return session.createQuery("SELECT g FROM Genre g WHERE g.name = :genreName", Genre.class)
+                    .setParameter("genreName", name)
+                    .getSingleResult(); 
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

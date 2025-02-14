@@ -2,6 +2,9 @@ package models;
 
 import java.util.Set;
 
+import org.hibernate.Session;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,5 +52,23 @@ public class Platforms {
 	public void setGames(Set<Game> games) {
 		this.games = games;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "Platforms [platformPK=" + platformPK + ", name=" + name + ", games=" + games + "]";
+	}
+	
+	public static Platforms getPlatformByName(String name, Session session) {
+		if (!session.getTransaction().getStatus().equals(TransactionStatus.ACTIVE)) {
+			session.getTransaction().begin();
+		}
+		
+		try {
+		    return session.createQuery("SELECT p FROM Platforms p WHERE p.name = :platformName", Platforms.class)
+                    .setParameter("platformName", name)
+                    .getSingleResult(); 
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }
